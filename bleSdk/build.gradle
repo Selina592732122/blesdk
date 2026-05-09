@@ -39,10 +39,14 @@ dependencies {
 }
 
 afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                from components.release
+    android.libraryVariants.all { variant ->
+        if (variant.name == 'release') {
+            publishing {
+                publications {
+                    "${variant.name}"(MavenPublication) {
+                        artifact("$buildDir/outputs/aar/${project.name}-${variant.name}.aar")
+                    }
+                }
             }
         }
     }

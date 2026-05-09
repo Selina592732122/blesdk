@@ -1,6 +1,5 @@
 plugins {
     id 'com.android.library'
-    id 'maven-publish'
 }
 
 android {
@@ -36,33 +35,4 @@ dependencies {
 
     implementation 'com.github.Jasonchenlijian:FastBle:2.4.0'
     implementation 'org.greenrobot:eventbus:3.1.1'
-}
-
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                from components.release
-                groupId = 'com.github.Selina592732122'
-                artifactId = 'blesdk'
-                version = '1.0.3'
-
-                pom {
-                    name = 'blesdk'
-                    description = 'BLE SDK for Android'
-                    url = 'https://github.com/Selina592732122/blesdk'
-                }
-            }
-        }
-        repositories {
-            maven {
-                name = 'GitHubPackages'
-                url = uri("https://maven.pkg.github.com/Selina592732122/blesdk")
-                credentials {
-                    username = System.getenv("GITHUB_ACTOR")
-                    password = System.getenv("GITHUB_TOKEN")
-                }
-            }
-        }
-    }
 }

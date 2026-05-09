@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/noNoticeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:visibility="visible">
+
+    <TextView
+        android:drawableTop="@drawable/ic_scan_empty"
+        android:id="@+id/noNoticeTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/no_devices_found"
+        android:textColor="#99000000"
+        android:textSize="12sp" />
+</LinearLayout>

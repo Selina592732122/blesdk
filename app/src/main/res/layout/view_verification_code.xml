@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/llCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+    <EditText
+        android:layout_alignParentLeft="true"
+        android:id="@+id/editCode"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text=""
+        android:cursorVisible="false"
+        android:background="@android:color/transparent"
+        android:inputType="number" />
+</RelativeLayout>

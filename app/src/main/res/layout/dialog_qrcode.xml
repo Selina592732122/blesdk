@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_round_white"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/share_way_qrcode"
+        android:textColor="#ff181818"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="#333333"
+        android:lineSpacingExtra="3dp"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/iv"
+        android:layout_gravity="center"
+        android:layout_width="164dp"
+        android:layout_margin="25dp"
+        android:layout_height="164dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/share_scan_hint"
+        android:textColor="#ff000000"
+        android:textSize="14sp"
+        android:visibility="gone"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"/>
+
+</LinearLayout>

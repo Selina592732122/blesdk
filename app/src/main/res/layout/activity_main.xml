@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/main_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/llBottom"
+        android:background="#fff6f6f8"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:id="@+id/llBottom"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="5dp"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ededed" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingBottom="5dp">
+
+            <LinearLayout
+                android:id="@+id/vehicleTabLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/vehicleTabIcon"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:src="@drawable/ic_home_selected" />
+
+                <TextView
+                    android:id="@+id/vehicleTabTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/my_vehicle"
+                    android:textColor="@color/main_tab_selected"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/storeTabLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:padding="1dp"
+                    android:id="@+id/storeTabIcon"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:src="@drawable/ic_store_unselected" />
+
+                <TextView
+                    android:id="@+id/storeTabTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/mall"
+                    android:textColor="@color/main_tab_unselected"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+
+            <!-- //TODO superLT 暂时隐藏商城tab -->
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:id="@+id/msgTabLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:padding="1dp"
+                        android:id="@+id/msgTabIcon"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:src="@drawable/ic_msg_unselected" />
+
+                    <TextView
+                        android:id="@+id/msgTabTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                    android:text="@string/messages"
+                        android:textColor="@color/main_tab_unselected"
+                        android:textSize="12sp" />
+                </LinearLayout>
+                
+                <ImageView
+                    android:id="@+id/badge_tv"
+                    android:visibility="gone"
+                    android:layout_width="26dp"
+                    android:layout_height="6dp"
+                    android:paddingLeft="20dp"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/bg_red_dot_shape"/>
+            </RelativeLayout>
+            
+
+            <LinearLayout
+                android:id="@+id/myTabLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:padding="1dp"
+                    android:id="@+id/myTabIcon"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:src="@drawable/ic_my_unselected" />
+
+                <TextView
+                    android:id="@+id/myTabTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/my_devices"
+                    android:textColor="@color/main_tab_unselected"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>

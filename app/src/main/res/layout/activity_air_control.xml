@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF6F6F8"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/ivBg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_air_control"/>
+
+    <View
+        android:id="@+id/statusBarView"
+        android:layout_width="match_parent"
+        android:layout_height="24dp" />
+
+    <RelativeLayout
+        android:layout_below="@+id/statusBarView"
+        android:id="@+id/titleLayout"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/titleBackBtn"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:padding="10dp"
+            android:src="@drawable/ic_title_back"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/air_control"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="24dp"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/bg_white_radius12_shape"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="24dp"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvMode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="制冷"
+                android:text="-"
+                android:textStyle="bold"
+                android:textColor="#ff1a1a1a"
+                android:textSize="28sp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/current_mode"
+                android:textColor="#99000000"
+                android:textSize="12sp"
+                />
+            <LinearLayout
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:gravity="center_vertical"
+                android:layout_height="wrap_content"> <!-- 浅蓝色背景 -->
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_air_left"
+                    android:layout_height="wrap_content"/>
+
+                <com.shenghao.widget.SixGearSeekBar
+                    android:id="@+id/gearSeekBar"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_air_right"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="24dp"
+            android:layout_marginTop="12dp"
+            android:orientation="vertical"
+            android:background="@drawable/bg_white_radius12_shape">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fan_speed"
+                android:textColor="#ff1a1a1a"
+                android:textSize="14sp"
+                />
+
+            <RadioGroup
+                android:id="@+id/rgFan"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/rbFan1"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:text="弱"
+                    android:drawablePadding="12dp"
+                    android:gravity="center"
+                    android:drawableTop="@drawable/selector_fan_one"
+                    android:textColor="#ff1a1a1a"
+                    android:textSize="13sp"
+                    android:layout_height="wrap_content"/>
+
+                <RadioButton
+                    android:id="@+id/rbFan2"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:text="中"
+                    android:drawablePadding="12dp"
+                    android:gravity="center"
+                    android:drawableTop="@drawable/selector_fan_two"
+                    android:textColor="#ff1a1a1a"
+                    android:textSize="13sp"
+                    android:layout_height="wrap_content"/>
+                <RadioButton
+                    android:id="@+id/rbFan3"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:text="强"
+                    android:drawablePadding="12dp"
+                    android:gravity="center"
+                    android:drawableTop="@drawable/selector_fan_three"
+                    android:textColor="#ff1a1a1a"
+                    android:textSize="13sp"
+                    android:layout_height="wrap_content"/>
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llBtn"
+            android:layout_width="match_parent"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/bg_blue_ok_radius_shape"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tvBtn"
+                android:layout_width="wrap_content"
+                android:text="关闭"
+                android:drawablePadding="10dp"
+                android:textColor="#ffffffff"
+                android:textSize="14sp"
+                android:padding="14dp"
+                android:gravity="center"
+                android:drawableStart="@drawable/ic_air_power"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

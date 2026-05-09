@@ -1,0 +1,704 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.shenghao.widget.MapFriendlyNestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nestedScrollView"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent"
+    android:overScrollMode="never"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- 车辆图片 -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:visibility="visible"
+                android:src="@drawable/bg_main_vehicle" />
+
+            <View
+                android:id="@+id/statusBarView"
+                android:layout_width="match_parent"
+                android:layout_height="24dp" />
+
+            <TextView
+                android:id="@+id/verticalNameTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/statusBarView"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="11dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="11dp"
+                android:singleLine="true"
+                tools:text="@string/haibao_electric_tricycle"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:drawableLeft="@drawable/ic_vehicle_close"
+                android:background="@drawable/bg_white_radius_shape4"
+                android:id="@+id/tvVirtualMode"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/statusBarView"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="11dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="11dp"
+                android:singleLine="true"
+                android:text="@string/experience_mode"
+                android:padding="8dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:textColor="#ffffff"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/restPowerLayout"
+                android:layout_below="@+id/verticalNameTv"
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="15dp"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/batteryPercentLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp">
+
+                    <TextView
+                        android:id="@+id/batteryPercentTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="36sp"
+                        android:textStyle="bold"
+                        tools:text="72" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="%"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                    android:id="@+id/batteryRoundPb"
+                    android:layout_width="84dp"
+                    android:layout_height="8dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
+                    app:rcBackgroundColor="#FFF2F2F2"
+                    app:rcBackgroundPadding="0dp"
+                    app:rcMax="100"
+                    app:rcProgressColors="@array/progress_gradient_colors"
+                    app:rcRadius="20dp" />
+                <!--                app:rcProgressColor="#2cd962"-->
+
+                <LinearLayout
+                    android:id="@+id/powerLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/voltage"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/powerTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        tools:text="64.68v" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/ivBle"
+                android:src="@drawable/ic_bluetooth_gray"
+                android:layout_below="@+id/verticalNameTv"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginRight="16dp"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:id="@+id/ivCar"
+                android:layout_width="300dp"
+                android:layout_height="200dp"
+                android:scaleType="fitCenter"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="11dp"
+                android:layout_below="@+id/ivBle"
+                android:src="@drawable/ic_item_vehicle" />
+
+            <LinearLayout
+                android:id="@+id/ll"
+                android:layout_below="@+id/ivCar"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/bg_white_radius8_shape"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:padding="12dp"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/vehicle_start"
+                            android:textColor="#ff181818"
+                            android:textSize="14sp"
+                            android:textStyle="bold"/>
+
+                        <LinearLayout
+                            android:layout_marginTop="3dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/current_status"
+                                android:textColor="#99000000"
+                                android:textSize="12sp"
+                                />
+                            <TextView
+                                android:id="@+id/tvStatus"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/not_started"
+                                android:drawablePadding="3dp"
+                                android:textColor="#99000000"
+                                android:textSize="12sp"
+                                app:drawableLeftCompat="@drawable/bg_gray_dot_shape" />
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <com.shenghao.widget.SlipButton
+                        android:id="@+id/powerBtn"
+                        android:layout_gravity="center"
+                        android:nestedScrollingEnabled="false"
+                        android:layout_width="142dp"
+                        android:layout_height="42dp"/>
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="#FFF2F2F2"/>
+                <!--                    <LinearLayout-->
+                <!--                        android:visibility="gone"-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:orientation="horizontal"-->
+                <!--                        android:layout_height="wrap_content">-->
+
+                <!--                        <LinearLayout-->
+                <!--                            android:id="@+id/alarmSettingLayout"-->
+                <!--                            android:padding="10dp"-->
+                <!--                            android:layout_width="0dp"-->
+                <!--                            android:layout_height="wrap_content"-->
+                <!--                            android:orientation="vertical"-->
+                <!--                            android:gravity="center"-->
+                <!--                            android:layout_weight="1">-->
+
+                <!--                            <ImageView-->
+                <!--                                android:src="@drawable/ic_home01"-->
+                <!--                                android:layout_width="wrap_content"-->
+                <!--                                android:layout_height="wrap_content"/>-->
+
+                <!--                            <TextView-->
+                <!--                                android:layout_width="wrap_content"-->
+                <!--                                android:layout_height="wrap_content"-->
+                <!--                                android:text="@string/defense_off"-->
+                <!--                                android:layout_marginTop="5dp"-->
+                <!--                                android:textColor="#e6000000"-->
+                <!--                                android:textSize="12sp"/>-->
+
+                <!--                        </LinearLayout>-->
+                <!--                        <LinearLayout-->
+                <!--                            android:id="@+id/powerControlLayout"-->
+                <!--                            android:padding="10dp"-->
+                <!--                            android:layout_width="0dp"-->
+                <!--                            android:layout_height="wrap_content"-->
+                <!--                            android:orientation="vertical"-->
+                <!--                            android:gravity="center"-->
+                <!--                            android:layout_weight="1">-->
+
+                <!--                            <ImageView-->
+                <!--                                android:id="@+id/ivLock"-->
+                <!--                                android:src="@drawable/ic_home02"-->
+                <!--                                android:scaleType="fitXY"-->
+                <!--                                android:layout_width="wrap_content"-->
+                <!--                                android:layout_height="wrap_content"/>-->
+
+                <!--                            <TextView-->
+                <!--                                android:id="@+id/tvLock"-->
+                <!--                                android:layout_width="wrap_content"-->
+                <!--                                android:layout_height="wrap_content"-->
+                <!--                                android:text="@string/click_defense"-->
+                <!--                                android:layout_marginTop="5dp"-->
+                <!--                                android:textColor="#e6000000"-->
+                <!--                                android:textSize="12sp"/>-->
+
+                <!--                        </LinearLayout>-->
+                <!--                        <LinearLayout-->
+                <!--                            android:id="@+id/llLight"-->
+                <!--                            android:padding="10dp"-->
+                <!--                            android:layout_width="0dp"-->
+                <!--                            android:layout_height="wrap_content"-->
+                <!--                            android:orientation="vertical"-->
+                <!--                            android:gravity="center"-->
+                <!--                            android:layout_weight="1">-->
+
+                <!--                            <ImageView-->
+                <!--                                android:id="@+id/ivLight"-->
+                <!--                                android:src="@drawable/ic_home03"-->
+                <!--                                android:layout_width="wrap_content"-->
+                <!--                                android:layout_height="wrap_content"/>-->
+
+                <!--                            <TextView-->
+                <!--                                android:id="@+id/tvLight"-->
+                <!--                                android:layout_width="wrap_content"-->
+                <!--                                android:layout_height="wrap_content"-->
+                <!--                                android:text="@string/turn_on_headlights"-->
+                <!--                                android:layout_marginTop="5dp"-->
+                <!--                                android:textColor="#e6000000"-->
+                <!--                                android:textSize="12sp"/>-->
+
+                <!--                        </LinearLayout>-->
+                <!--                        <LinearLayout-->
+                <!--                            android:id="@+id/findCarLayout"-->
+                <!--                            android:padding="10dp"-->
+                <!--                            android:layout_width="0dp"-->
+                <!--                            android:layout_height="wrap_content"-->
+                <!--                            android:orientation="vertical"-->
+                <!--                            android:gravity="center"-->
+                <!--                            android:layout_weight="1">-->
+
+                <!--                            <ImageView-->
+                <!--                                android:src="@drawable/ic_home04"-->
+                <!--                                android:layout_width="wrap_content"-->
+                <!--                                android:layout_height="wrap_content"/>-->
+
+                <!--                            <TextView-->
+                <!--                                android:layout_width="wrap_content"-->
+                <!--                                android:layout_height="wrap_content"-->
+                <!--                                android:text="@string/find_vehicle"-->
+                <!--                                android:layout_marginTop="5dp"-->
+                <!--                                android:textColor="#e6000000"-->
+                <!--                                android:textSize="12sp"/>-->
+
+                <!--                        </LinearLayout>-->
+                <!--                    </LinearLayout>-->
+
+                <com.shenghao.widget.CircleMenuPager
+                    android:id="@+id/circleMenuPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <!-- 车况 -->
+            <LinearLayout
+                android:layout_below="@+id/ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:paddingTop="12dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <!-- 电压电量 -->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="8dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="11dp"
+                        app:cardElevation="0dp">
+
+                        <RelativeLayout
+                            android:id="@+id/llOnekey"
+                            android:layout_width="match_parent"
+                            android:background="@color/white"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:src="@drawable/bg_one_key"
+                                android:scaleType="centerCrop"
+                                android:layout_height="wrap_content"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="12dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_weight="1"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/palm_move_car"
+                                        android:textStyle="bold"
+                                        android:drawableEnd="@drawable/ic_enter_arrow"
+                                        android:drawablePadding="4dp"
+                                        android:gravity="center_vertical"
+                                        android:drawableStart="@drawable/ic_onekey"
+                                        android:textColor="#ff181818"
+                                        android:textSize="14sp" />
+
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!--骑行记录-->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="8dp"
+                        android:layout_marginRight="16dp"
+                        app:cardElevation="0dp"
+                        android:layout_height="match_parent">
+                        <LinearLayout
+                            android:id="@+id/ridingDataLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="12dp"
+                            android:background="@drawable/ic_main_ride_bg">
+
+                            <LinearLayout
+                                android:gravity="top"
+                                android:layout_width="match_parent"
+                                android:layout_weight="1"
+                                android:layout_height="0dp">
+
+                                <TextView
+                                    android:id="@+id/ridingDataTv"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/riding_records"
+                                    android:drawablePadding="4dp"
+                                    android:layout_weight="1"
+                                    android:textColor="#ff181818"
+                                    android:gravity="center_vertical"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold"
+                                    android:drawableEnd="@drawable/ic_enter_arrow"
+                                    app:drawableStartCompat="@drawable/ic_ride_record" />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:id="@+id/sumRidingDistanceLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="13dp"
+                                android:layout_marginRight="0dp"
+                                android:orientation="vertical"
+                                android:visibility="visible">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content">
+
+                                    <TextView
+                                        android:id="@+id/sumRidingDistanceTv"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        tools:text="231.4"
+                                        android:textColor="#FF181818"
+                                        android:textSize="30sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="2dp"
+                                        android:text="km"
+                                        android:textColor="#FF181818"
+                                        android:textSize="12sp"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/total_mileage"
+                                    android:textColor="#99000000"
+                                    android:textSize="11sp" />
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content">
+
+                                    <TextView
+                                        android:id="@+id/tvLastDistance"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="0.0"
+                                        android:textColor="#FF181818"
+                                        android:textSize="18sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="2dp"
+                                        android:text="km"
+                                        android:textColor="#FF181818"
+                                        android:textSize="14sp"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/last_trip"
+                                    android:textColor="#99000000"
+                                    android:textSize="11sp" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+
+                <!-- 当前位置 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="@drawable/bg_white_radius8_shape"
+                    android:orientation="vertical"
+                    android:paddingLeft="12dp"
+                    android:paddingTop="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingBottom="12dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/vehicle_positioning"
+                            android:textColor="#FF181818"
+                            android:textSize="14sp"
+                            android:drawablePadding="4dp"
+                            android:drawableStart="@drawable/ic_main_location"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/gpsTimeTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="4dp"
+                            android:textColor="#99000000"
+                            android:textSize="12sp"
+                            tools:text="2024-04-01 22:37" />
+
+                        <ImageView
+                            android:id="@+id/gpsRefreshIv"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginLeft="5dp"
+                            android:padding="3dp"
+                            android:src="@drawable/ic_refresh_location" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="1px"
+                            android:layout_weight="1" />
+
+                    </LinearLayout>
+
+                    <!-- 地图 -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/vehicleMapContainer"
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            app:cardCornerRadius="4dp"
+                            app:cardElevation="0dp">
+
+                            <com.amap.api.maps.MapView
+                                android:id="@+id/vehicleMapView"
+                                android:layout_width="match_parent"
+                                android:layout_height="150dp" />
+                        </androidx.cardview.widget.CardView>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginRight="8dp"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/gpsBtn"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:src="@drawable/ic_terminal_location" />
+
+                            <ImageView
+                                android:id="@+id/locationBtn"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:src="@drawable/ic_user_location" />
+
+                        </LinearLayout>
+                    </RelativeLayout>
+                    <TextView
+                        android:id="@+id/gpsAddressTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:layout_marginTop="8dp"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:background="@drawable/bg_gray_04_radius4_shape"
+                        android:textColor="#E6000000"
+                        android:textSize="12sp"
+                        tools:text="浙江省杭州市西湖风景区" />
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/tvControl"
+                    android:drawablePadding="8dp"
+                    android:background="@drawable/bg_control_radius_shape"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/vehicle_condition"
+                    android:textColor="#ff181818"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:paddingTop="16dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingBottom="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="10dp"
+                    android:drawableEnd="@drawable/ic_enter_arrow"
+                    android:drawableStart="@drawable/ic_main_control"/>
+
+                <TextView
+                    android:id="@+id/tvControl2"
+                    android:drawablePadding="8dp"
+                    android:background="@drawable/bg_control_radius_shape"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/vehicle_control"
+                    android:textColor="#ff181818"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:paddingTop="16dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingBottom="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="10dp"
+                    android:drawableEnd="@drawable/ic_enter_arrow"
+                    android:drawableStart="@drawable/ic_main_control2"/>
+
+                <TextView
+                    android:id="@+id/tvShare"
+                    android:drawablePadding="8dp"
+                    android:background="@drawable/bg_share_radius_shape"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/share_key"
+                    android:textColor="#ff181818"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:paddingTop="16dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingBottom="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="10dp"
+                    android:drawableEnd="@drawable/ic_enter_arrow"
+                    android:drawableStart="@drawable/ic_main_share"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+
+
+    </LinearLayout>
+</com.shenghao.widget.MapFriendlyNestedScrollView>

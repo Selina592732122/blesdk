@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_radius_shape"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_marginTop="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="档位选择"
+            android:textColor="#ff181818"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginRight="16dp"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:background="@drawable/bg_tooth_gear_unselect"
+                android:layout_marginRight="8dp"
+                android:id="@+id/blue_tooth_weak"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/gear_weak_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="弱"
+                    android:textColor="#99000000"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/gear_connect_weak_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="连接1米"
+                    android:textColor="#99000000"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/gear_disconnect_weak_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="断开3米"
+                    android:textColor="#99000000"
+                    android:textSize="13sp" />
+
+
+            </LinearLayout>
+            <RelativeLayout
+                android:background="@drawable/bg_tooth_gear_unselect"
+                android:id="@+id/blue_tooth_middle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:background="@drawable/ic_blue_tooth_gear_recommend"
+                    />
+
+                <TextView
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/gear_mid_text"
+                    android:layout_alignParentTop="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="中"
+                    android:textColor="#99000000"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/gear_connect_middle_value"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/gear_mid_text"
+                    android:layout_marginTop="2dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="连接2米"
+                    android:textColor="#99000000"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/gear_disconnect_middle_value"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/gear_connect_middle_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="断开5米"
+                    android:textColor="#99000000"
+                    android:textSize="13sp" />
+
+
+
+            </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:background="@drawable/bg_tooth_gear_unselect"
+                android:id="@+id/blue_tooth_strong"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/gear_strong_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="强"
+                    android:textColor="#99000000"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/gear_connect_strong_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="连接5米"
+                    android:textColor="#99000000"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/gear_disconnect_strong_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="断开10米"
+                    android:textColor="#99000000"
+                    android:textSize="13sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/bg_tooth_gear_unselect"
+                android:id="@+id/blue_tooth_config"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/gear_config_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="自定义"
+                    android:textColor="#99000000"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/tvConfigDistance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="可自定义\n距离"
+                    android:gravity="center"
+                    android:textColor="#99000000"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="13sp" />
+
+                <!--                <TextView-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="1dp"-->
+                <!--                    android:layout_marginBottom="20dp"-->
+                <!--                    android:text="距离"-->
+                <!--                    android:textColor="#99000000"-->
+                <!--                    android:textSize="13sp" />-->
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/tvSet"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_gravity="center"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:text="蓝牙参数设置"-->
+        <!--            android:visibility="gone"-->
+        <!--            android:textColor="#FF1C70E6"-->
+        <!--            android:layout_marginTop="16dp"-->
+        <!--            android:textSize="14sp"-->
+        <!--            android:textStyle="bold" />-->
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/gear_confirm"
+            android:text="确认"
+            android:textColor="@color/white"
+            android:background="@drawable/selector_scan_btn"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

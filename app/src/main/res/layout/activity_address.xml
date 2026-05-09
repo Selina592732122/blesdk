@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF7F8FB"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/statusBarView"
+        android:layout_width="match_parent"
+        android:layout_height="24dp" />
+
+    <ImageView
+        android:id="@+id/iv"
+        android:layout_width="match_parent"
+        android:src="@drawable/ic_address_bg"
+        android:scaleType="centerCrop"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:layout_below="@+id/statusBarView"
+        android:id="@+id/titleLayout"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/titleBackBtn"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:padding="10dp"
+            android:src="@drawable/ic_arrow_left_white"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/outlet_info"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/titleLayout"
+        android:layout_width="match_parent"
+        android:padding="20dp"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/llShi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginRight="13dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tvShi"
+                android:layout_marginTop="11dp"
+                android:layout_marginBottom="11dp"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:drawableRight="@drawable/ic_enter_arrow"
+                android:layout_height="20dp"
+                tools:text="天津市"
+                android:textColor="#ffffffff"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/white" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llQu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tvQu"
+                android:layout_marginTop="11dp"
+                android:layout_marginBottom="11dp"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:drawableRight="@drawable/ic_enter_arrow"
+                android:layout_height="20dp"
+                tools:text="西津区"
+                android:textColor="#ffffffff"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/white" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_below="@+id/iv"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/bg_gray_03_radius_shape"
+        android:layout_marginTop="-32dp"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/llFind"
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <com.shenghao.widget.EmptyRecyclerView
+                android:id="@+id/recyclerView"
+                android:visibility="visible"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tvEmptyAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/no_info"
+                android:layout_gravity="center"
+                android:textColor="#99000000"
+                android:textSize="12sp"
+                app:drawableTopCompat="@drawable/ic_scan_empty" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

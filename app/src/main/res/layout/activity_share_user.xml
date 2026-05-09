@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#FFF7F8FB"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="304dp"/>
+
+    <View
+        android:id="@+id/statusBarView"
+        android:layout_width="match_parent"
+        android:layout_height="24dp" />
+
+    <RelativeLayout
+        android:layout_below="@+id/statusBarView"
+        android:id="@+id/titleLayout"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/titleBackBtn"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:padding="10dp"
+            android:src="@drawable/ic_title_back"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/share_user_info"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/titleLayout"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:padding="8dp"
+            android:layout_width="match_parent"
+            android:layout_marginTop="36dp"
+            android:layout_marginLeft="16dp"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivUser"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginRight="12dp"
+                app:strokeColor="@android:color/white"
+                app:strokeWidth="2dp"
+                android:scaleType="centerCrop"
+                app:shapeAppearance="@style/RoundedStyle"
+                android:src="@drawable/ic_user_default_portrait" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="家人-哥哥"
+                    android:textColor="#e6000000"
+                    android:textSize="24sp"
+                    android:id="@+id/tvName"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2025/08/23 加入"
+                    android:textColor="#66000000"
+                    android:textSize="14sp"
+                    android:id="@+id/tvTime"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_margin="16dp"
+            android:background="@drawable/bg_white_radius_shape"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:paddingLeft="16dp"
+                android:paddingTop="11dp"
+                android:paddingBottom="11dp"
+                android:paddingRight="16dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/account"
+                    android:textColor="#e6000000"
+                    android:textSize="14sp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="17288887382"
+                    android:textColor="#99000000"
+                    android:textSize="14sp"
+                    android:id="@+id/tvPhone"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/llNote"
+                android:layout_width="match_parent"
+                android:paddingLeft="16dp"
+                android:paddingTop="11dp"
+                android:paddingBottom="11dp"
+                android:paddingRight="16dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/note"
+                    android:textColor="#e6000000"
+                    android:textSize="14sp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/tvNote"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_set"
+                    android:textColor="#99000000"
+                    android:textSize="14sp"
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="4dp"
+                    android:src="@drawable/ic_enter_arrow"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:paddingLeft="16dp"
+                android:paddingTop="11dp"
+                android:paddingBottom="11dp"
+                android:paddingRight="16dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/permission"
+                    android:textColor="#e6000000"
+                    android:textSize="14sp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/member"
+                    android:textColor="#99000000"
+                    android:textSize="14sp"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tvCancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel_share"
+            android:gravity="center"
+            android:layout_margin="16dp"
+            android:padding="17dp"
+            android:textColor="#FF3C86FC"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_gray_02_radius_shape"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF7F8FB"
+    android:fitsSystemWindows="true">
+
+    <RelativeLayout
+        android:id="@+id/titleLayout"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/titleBackBtn"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:padding="10dp"
+            android:src="@drawable/ic_title_back"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="骑行轨迹"
+            android:textColor="#E6000000"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="#F5F5F5" />
+    </RelativeLayout>
+
+    <com.amap.api.maps.MapView
+        android:id="@+id/vehicleMapView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/llBottom"
+        android:layout_below="@+id/titleLayout"
+        android:layout_marginBottom="-25dp" />
+
+    <LinearLayout
+        android:id="@+id/llBottom"
+        android:background="@drawable/bg_white_radius_shape"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="22dp"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="总里程"
+            android:textColor="#ff181818"
+            android:textSize="14sp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="6dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/ridingDistanceTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3.45"
+                android:textColor="#ff181818"
+                android:textSize="36sp"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="km"
+                android:textColor="#99000000"
+                android:textSize="16sp"
+                android:layout_marginLeft="4dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2024年08月21日 星期四"
+                android:textColor="#e6000000"
+                android:textSize="14sp"
+                android:id="@+id/ridingDateTv"/>
+
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:src="@drawable/ic_ride_line"
+            android:scaleType="fitXY"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/ridingTimeTv"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="09:45"
+                android:textColor="#99000000"
+                android:textSize="12sp"
+                android:layout_marginTop="3dp"/>
+            <TextView
+                android:id="@+id/ridingTimeTv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="09:45"
+                android:textColor="#99000000"
+                android:textSize="12sp"
+                android:layout_marginTop="3dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp"
+            android:visibility="visible"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="9dp"
+                android:background="@drawable/bg_riding_detail_distance_shape"
+                android:gravity="center_vertical"
+                android:padding="15dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_time" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_marginLeft="12dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="耗时"
+                        android:textColor="#FF181818"
+                        android:textSize="12sp" />
+                    <TextView
+                        android:id="@+id/ridingDurationTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textColor="#E6000000"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:text="00:33:46" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_riding_detail_distance_shape"
+                android:gravity="center_vertical"
+                android:padding="15dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_speed" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_marginLeft="12dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="平均速度"
+                        android:textColor="#FF181818"
+                        android:textSize="12sp" />
+                    <TextView
+                        android:id="@+id/ridingSpeedTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textColor="#E6000000"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:text="00:33:46" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/llAddr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:background="@drawable/bg_riding_detail_distance_shape"
+            android:paddingTop="20dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="5dp"
+                    android:layout_height="5dp"
+                    android:layout_marginTop="6dp"
+                    android:src="@drawable/ic_start_dot" />
+
+                <TextView
+                    android:id="@+id/ridingStartPointTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:textColor="#E6000000"
+                    android:textSize="12sp"
+                    tools:text="江苏省徐州市云龙湖风景区" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <ImageView
+                    android:layout_width="5dp"
+                    android:layout_height="5dp"
+                    android:layout_marginTop="6dp"
+                    android:src="@drawable/ic_end_dot" />
+
+                <TextView
+                    android:id="@+id/ridingEndPointTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:textColor="#E6000000"
+                    android:textSize="12sp"
+                    tools:text="江苏省徐州市贾汪区徐州东站" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

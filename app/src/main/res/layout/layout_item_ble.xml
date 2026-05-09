@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:orientation="vertical"
+    android:paddingTop="12dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="newbitin"
+                android:textColor="#ff181818"
+                android:textSize="16sp"
+                android:drawablePadding="4dp"
+                android:drawableEnd="@drawable/ic_edit"/>
+            <TextView
+                android:id="@+id/tvAddr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1C:52:16:BE:56:E1"
+                android:layout_marginTop="4dp"
+                android:textColor="#99000000"
+                android:textSize="12sp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llStatus"
+            android:layout_width="65dp"
+            android:background="@drawable/bg_gray_cancel_radius_shape"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/connect"
+                android:textColor="#99000000"
+                android:textSize="12sp"
+                android:drawablePadding="3dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/viewLine"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="16dp"
+        android:background="#1A000000"/>
+</LinearLayout>

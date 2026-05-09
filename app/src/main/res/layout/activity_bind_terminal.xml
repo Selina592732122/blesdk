@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF7F8FB"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:scaleType="centerCrop" />
+
+    <View
+        android:id="@+id/statusBarView"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="24dp" />
+
+    <RelativeLayout
+        android:id="@+id/titleLayout"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_below="@+id/statusBarView"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/titleBackBtn"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:padding="10dp"
+            android:src="@drawable/ic_title_back"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/scan_bind_vehicle"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvExit"
+            android:layout_width="wrap_content"
+            android:text="切换账号"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:padding="12dp"
+            android:visibility="gone"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titleLayout"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:id="@+id/ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:padding="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/scan_or_manual_input"
+                    android:textColor="#FF181818"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/versionNameTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="@string/ev_qr_code"
+                    android:textColor="#99000000"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_below="@+id/ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/ic_scan_terminal_bg" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/bg_white_radius_shape"
+            android:gravity="center_vertical"
+            android:textColor="@color/black">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/terminalNoEt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:hint="@string/enter_activation_code_or_device_number"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textColor="#FF181818"
+                android:textColorHint="#66000000"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/scanBtn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:padding="3dp"
+                android:background="@drawable/bg_scan_radius_shape"
+                android:src="@drawable/ic_scan_login" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/bg_white_radius_shape"
+            android:gravity="center_vertical"
+            android:textColor="@color/black">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etVehicle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:hint="@string/enter_vehicle_number"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textColor="#FF181818"
+                android:textColorHint="#66000000"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/scanBtn2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:padding="3dp"
+                android:background="@drawable/bg_scan_radius_shape"
+                android:src="@drawable/ic_scan_login" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/bg_white_radius_shape"
+            android:gravity="center_vertical"
+            android:textColor="@color/black">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/batteryCountEt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:hint="@string/enter_battery_count"
+                android:inputType="number"
+                android:maxLength="1"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textColor="#FF181818"
+                android:textColorHint="#66000000"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/bindBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:background="@drawable/selector_next_btn"
+        android:gravity="center"
+        android:paddingTop="13dp"
+        android:paddingBottom="13dp"
+        android:text="@string/next_step"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+</RelativeLayout>

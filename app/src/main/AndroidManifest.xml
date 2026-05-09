@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <!--相机权限-->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <!--允许访问网络，必选权限-->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!--允许获取精确位置，精准定位必选-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <!--允许获取粗略位置，粗略定位必选-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!--允许获取网络状态，用于网络定位（无gps情况下的定位），若需网络定位功能则必选-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!--允许获取wifi网络信息，用于网络定位（无gps情况下的定位），若需网络定位功能则必选-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <!--允许获取wifi状态改变，用于网络定位（无gps情况下的定位），若需网络定位功能则必选-->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
+    <!--后台获取位置信息，若需后台定位则必选-->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+
+    <!--用于申请调用A-GPS模块,卫星定位加速-->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+
+    <!--允许写设备缓存，用于问题排查-->
+    <uses-permission
+        android:name="android.permission.WRITE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
+    <application
+        android:name=".ShengHaoApp"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@drawable/ic_app_logo"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.ShengHao"
+        android:networkSecurityConfig="@xml/network_config"
+        tools:targetApi="31" >
+        <activity
+            android:name=".ui.SplashActivity"
+            android:exported="true">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".ui.LoginActivity"
+            android:launchMode="singleTop" />
+        <activity android:name=".ui.LoginOneKeyActivity"/>
+        <activity android:name=".ui.RidingDataActivity" />
+        <activity android:name=".ui.RidingDataDetailActivity" />
+        <activity android:name=".ui.SettingActivity" />
+        <activity android:name=".ui.ComingSoonActivity" />
+        <activity android:name=".ui.PdfActivity" />
+        <activity android:name=".ui.BindTerminalActivity"/>
+        <activity android:name=".ui.UploadTerminalInfoActivity" />
+        <activity android:name=".ui.JFWebActivity" />
+        <activity android:name=".ui.GeoFenceListActivity" />
+        <activity android:name=".ui.EditGeoFenceCircleActivity" android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".ui.EditGeoFencePolygonActivity" />
+        <activity android:name=".ui.NoticeCenterActivity" />
+        <activity android:name=".ui.NoticeDetailActivity" />
+        <activity android:name=".ui.AlarmSettingActivity" />
+        <activity android:name=".ui.PayServiceActivity" />
+        <activity android:name=".ui.AccountManageActivity" />
+        <activity android:name=".ui.BindMailActivity" />
+        <activity android:name=".ui.BindPhoneActivity" />
+        <activity android:name=".ui.WxBindPhoneActivity">
+        </activity>
+        <activity android:name=".ui.SettingPasswordActivity" />
+        <activity android:name=".ui.FindPasswordActivity" />
+        <activity android:name=".ui.MailLoginActivity" />
+        <activity android:name=".ui.BatteryActivity" />
+        <activity android:name=".ui.KeyActivity" />
+        <activity android:name=".ui.OneKeyActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden|screenLayout">
+        </activity>
+        <activity android:name=".ui.OneKeyPortraitActivity"/>
+        <activity android:name=".ui.Control2Activity" />
+        <activity android:name=".ui.AirControlActivity" />
+        <activity android:name=".ui.SeatControlActivity" />
+        <activity android:name=".ui.SosActivity" />
+        <activity android:name=".ui.WindowControlActivity" />
+        <activity android:name=".ui.ChargeActivity" />
+        <activity android:name=".ui.BleActivity"
+            android:exported="true">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
+        <activity android:name=".ui.BleSdkDemoActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+        <activity android:name=".ui.ShareActivity" />
+        <activity android:name=".ui.ShareUserActivity" />
+        <activity android:name=".ui.NoticeSysActivity" />
+        <activity android:name=".ui.AddressActivity"/>
+        <activity android:name=".jpush.DialogActivity"
+            android:theme="@style/TransparentDialogTheme">
+        </activity>
+
+        <activity android:name=".ui.PersonalActivity"/>
+        <activity android:name=".ui.ControlActivity"/>
+        <activity android:name=".ui.ThemeActivity"/>
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:exported="true"
+            android:taskAffinity="com.shenghao"
+            android:launchMode="singleTask">
+        </activity>
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:exported="true"
+            android:taskAffinity="com.shenghao"
+            android:launchMode="singleTask">
+        </activity>
+
+        <service android:name=".ble.BluetoothService"
+            android:exported="false"
+            android:foregroundServiceType="connectedDevice"/>
+
+
+        <!-- Since JCore2.0.0 Required SDK核心功能-->
+        <!-- 可配置android:process参数将Service放在其他进程中；android:enabled属性不能是false -->
+        <!-- 这个是自定义Service，要继承极光JCommonService，可以在更多手机平台上使得推送通道保持的更稳定 -->
+        <service android:name=".jpush.JPushService"
+            android:enabled="true"
+            android:exported="false"
+            android:process=":pushcore">
+            <intent-filter>
+                <action android:name="cn.jiguang.user.service.action" />
+            </intent-filter>
+        </service>
+
+        <!-- 新的 tag/alias 接口结果返回需要开发者配置一个自定义的Receiver -->
+        <!-- 该广播需要继承 JPush 提供的 JPushMessageReceiver 类, 并如下新增一个 Intent-Filter -->
+        <receiver
+            android:name=".jpush.JPushReceiver"
+            android:enabled="true"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.RECEIVER_MESSAGE" />
+                <category android:name="com.shenghao" />
+            </intent-filter>
+        </receiver>
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="3e282d8b16fdbb6e8c7b8373458a96fa" />
+        <service android:name="com.amap.api.location.APSService"></service>
+        <!-- 告知 XXPermissions 当前项目已经适配了分区存储特性 -->
+        <meta-data
+            android:name="ScopedStorage"
+            android:value="true" />
+    </application>
+    <queries>
+        <package android:name="com.tencent.mm" />
+    </queries>
+</manifest>

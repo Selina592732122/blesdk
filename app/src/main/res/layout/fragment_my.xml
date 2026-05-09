@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:overScrollMode="never"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ivBg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_main_my" />
+
+            <View
+                android:id="@+id/statusBarView"
+                android:layout_width="match_parent"
+                android:layout_height="24dp" />
+
+            <RelativeLayout
+                android:id="@+id/rlUser"
+                android:layout_below="@+id/statusBarView"
+                android:layout_width="match_parent"
+                android:layout_marginTop="32dp"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_centerHorizontal="true"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/ivUser"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:scaleType="centerCrop"
+                        app:shapeAppearance="@style/RoundedStyle"
+                        android:src="@drawable/ic_user_default_portrait" />
+
+                    <TextView
+                        android:id="@+id/userNameTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#FF1A1A1A"
+                        android:textSize="20sp"
+                        android:layout_marginTop="8dp"
+                        android:textStyle="bold"
+                        tools:text="12345678901" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/ivEdit"
+                    android:layout_marginRight="16dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_my_edit"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_below="@+id/rlUser"
+                android:layout_width="match_parent"
+                android:layout_marginTop="31dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/geoFenceLayout"
+                    android:drawableTop="@drawable/ic_custom_geofence"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/electronic_fence"
+                    android:background="?attr/selectableItemBackground"
+                    android:textStyle="bold"
+                    android:textColor="#ff343a56"
+                    android:textSize="12sp"
+                    android:drawablePadding="8dp"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/pointSearchLayout"
+                    android:drawableTop="@drawable/ic_point_search"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackground"
+                    android:text="@string/outlet_query"
+                    android:textStyle="bold"
+                    android:textColor="#ff343a56"
+                    android:textSize="12sp"
+                    android:drawablePadding="8dp"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/llBle"
+                    android:drawableTop="@drawable/ic_bluetooth_bind"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/bluetooth_binding"
+                    android:background="?attr/selectableItemBackground"
+                    android:textStyle="bold"
+                    android:textColor="#ff343a56"
+                    android:textSize="12sp"
+                    android:drawablePadding="8dp"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/settingLayout"
+                    android:drawableTop="@drawable/ic_title_setting"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/settings"
+                    android:background="?attr/selectableItemBackground"
+                    android:textStyle="bold"
+                    android:textColor="#ff343a56"
+                    android:textSize="12sp"
+                    android:drawablePadding="8dp"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="0dp"
+                android:layout_alignBottom="@+id/ivBg"
+                app:cardElevation="4dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                app:cardBackgroundColor="@android:color/transparent">
+
+                <LinearLayout
+                    android:background="@drawable/bg_black_radius_shape3"
+                    android:layout_width="match_parent"
+                    android:paddingLeft="16dp"
+                    android:paddingBottom="12dp"
+                    android:paddingTop="12dp"
+                    android:gravity="center_vertical"
+                    android:paddingRight="16dp"
+
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+                        <TextView
+                            android:id="@+id/tvGradient"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/smart_service"
+                            android:textColor="#FFC9CFE5"
+                            android:textSize="16sp"
+                            android:textStyle="bold"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/unlock_more_features"
+                            android:textColor="#ffd2d7e9"
+                            android:textSize="12sp"
+                            />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/serviceLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/activate_now"
+                        android:textColor="#ffffffff"
+                        android:drawablePadding="2dp"
+                        android:textSize="12sp"
+                        android:gravity="center"
+                        android:drawableEnd="@drawable/ic_arrow_right_white"/>
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_marginTop="28dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/my_devices"
+                android:textColor="#ff181818"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvUnbind"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:text="一键解绑"
+                android:textColor="#99000000"
+                android:paddingLeft="8dp"
+                android:gravity="center"
+                android:paddingRight="8dp"
+                android:layout_marginRight="12dp"
+                android:textSize="12sp"
+                android:background="@drawable/bg_black_radius_shape4"/>
+
+            <TextView
+                android:id="@+id/addTerminalBtn"
+                android:background="@drawable/switch_track_blue"
+                android:backgroundTint="#FFF57F2A"
+                app:drawableStartCompat="@drawable/ic_add_white"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:text="@string/add"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:gravity="center"
+                android:textColor="#ffffffff"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+        <!-- 我的设备 -->
+        <RelativeLayout
+            android:id="@+id/terminalLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:descendantFocusability="blocksDescendants"
+            android:layout_marginLeft="16dp"
+            android:clipChildren="false"
+            android:layout_marginRight="16dp"
+            android:orientation="vertical">
+
+            <com.shenghao.widget.HorizontalPriorityRecyclerView
+                android:id="@+id/terminalRv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"
+                android:scrollbars="none" />
+
+            <com.shenghao.widget.CustomDotIndicator
+                android:id="@+id/indicator"
+                android:padding="8dp"
+                android:layout_gravity="center"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/llShare"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_gravity="center_vertical"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_terminal_item">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="15dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvShare"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="HB1500DZH-4的共享"
+                    android:textColor="#e6000000"
+                    android:textSize="13sp"
+                    />
+                <TextView
+                    android:id="@+id/tvNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nums_of_user"
+                    android:textColor="#99000000"
+                    android:textSize="12sp"
+                    android:layout_marginTop="2dp"/>
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/service"
+            android:textStyle="bold"
+            android:textColor="#ff181818"
+            android:textSize="18sp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="12dp"
+            android:layout_marginTop="24dp"/>
+
+        <LinearLayout
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:background="@drawable/bg_terminal_item"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tvGuide"
+                android:layout_width="match_parent"
+                android:drawableRight="@drawable/ic_enter_arrow"
+                android:layout_height="wrap_content"
+                android:text="@string/user_guide"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:textColor="#FF181818"
+                android:drawablePadding="8dp"
+                android:textSize="14sp"
+                android:drawableLeft="@drawable/ic_my_guide"/>
+
+            <TextView
+                android:id="@+id/tvPair"
+                android:layout_width="match_parent"
+                android:drawableRight="@drawable/ic_enter_arrow"
+                android:layout_height="wrap_content"
+                android:text="@string/key_pair"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:textColor="#FF181818"
+                android:drawablePadding="8dp"
+                android:textSize="14sp"
+                android:drawableLeft="@drawable/ic_key_pair"/>
+            <TextView
+                android:id="@+id/tvTheme"
+                android:layout_width="match_parent"
+                android:drawableRight="@drawable/ic_enter_arrow"
+                android:layout_height="wrap_content"
+                android:text="@string/theme"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:textColor="#FF181818"
+                android:drawablePadding="8dp"
+                android:textSize="14sp"
+                android:drawableLeft="@drawable/ic_my_theme"/>
+            <TextView
+                android:id="@+id/tvOta"
+                android:layout_width="match_parent"
+                android:drawableRight="@drawable/ic_enter_arrow"
+                android:layout_height="wrap_content"
+                android:text="@string/ota"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:textColor="#FF181818"
+                android:drawablePadding="8dp"
+                android:textSize="14sp"
+                android:drawableLeft="@drawable/ic_my_ota"/>
+            <TextView
+                android:id="@+id/tvSos"
+                android:layout_width="match_parent"
+                android:drawableRight="@drawable/ic_enter_arrow"
+                android:layout_height="wrap_content"
+                android:text="紧急联系人"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:textColor="#FF181818"
+                android:drawablePadding="8dp"
+                android:textSize="14sp"
+                android:drawableLeft="@drawable/ic_my_sos"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

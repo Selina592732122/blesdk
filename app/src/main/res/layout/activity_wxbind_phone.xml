@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/titleLayout"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/titleBackBtn"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:padding="10dp"
+            android:src="@drawable/ic_title_back"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/llStep1"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:padding="24dp"
+        android:visibility="visible"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="绑定手机号"
+            android:textColor="#e6000000"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="46dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_gray_edittext_radius_shape"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+86"
+                android:textColor="#ff777777"
+                android:textSize="16sp"
+                android:drawablePadding="5dp"
+                android:drawableRight="@drawable/ic_arrow_gray_down"/>
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:hint="输入手机号"
+                android:padding="15dp"
+                android:singleLine="true"
+                android:textColor="#FF181818"
+                android:textColorHint="#66000000"
+                android:inputType="phone"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_gray_edittext_radius_shape"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:hint="输入验证码"
+                android:padding="15dp"
+                android:singleLine="true"
+                android:textColor="#FF181818"
+                android:textColorHint="#66000000"
+                android:inputType="phone"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/tvGet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="获取验证码"
+                android:textColor="#fff57f2a"
+                android:textSize="14sp"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tvLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="登录"
+        android:padding="13dp"
+        android:enabled="false"
+        android:gravity="center"
+        android:background="@drawable/selector_scan_btn"
+        android:layout_margin="24dp"
+        android:textColor="#ffffffff"
+        android:textSize="16sp"/>
+</LinearLayout>

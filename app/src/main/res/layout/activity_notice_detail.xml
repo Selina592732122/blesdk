@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF7F8FB"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/titleLayout"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/titleBackBtn"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:padding="10dp"
+            android:src="@drawable/ic_title_back"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="通知详情"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_white_radius_shape">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp">
+
+                <ImageView
+                    android:id="@+id/noticeIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_notify_msg_default" />
+
+                <TextView
+                    android:id="@+id/noticeTitleTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:textColor="#FF181818"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    tools:text="充电结束通知充电结束通知充电结束通知充电结束通知充电结束通知" />
+            </LinearLayout>
+
+
+
+            <TextView
+                android:id="@+id/noticeContentTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="43dp"
+                android:layout_marginRight="16dp"
+                android:lineSpacingExtra="3dp"
+                android:layout_marginTop="4dp"
+                android:textColor="#E6000000"
+                android:textSize="14sp"
+                tools:text="您的爱车已充电完成您的爱车已充电完成您的爱车已充电完成您的爱车已充电完成您的爱车已充电完成您的爱车已充电完成您的爱车已充电完成您的爱车已充电完成您的爱车已充电完成您的爱车已充电完成您的爱车已充电完成您的爱车已充电完成您的爱车已充电完成您的爱车已充电完成" />
+
+            <TextView
+                android:id="@+id/noticeDateTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="43dp"
+                android:layout_marginTop="12dp"
+                android:textColor="#99000000"
+                android:textSize="12sp"
+                tools:text="2024-6-29 23:27:30" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

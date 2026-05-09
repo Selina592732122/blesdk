@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/avatar_container"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="-12dp"
+    android:clipChildren="false">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_avatar"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_user_default_portrait"
+        app:strokeColor="@android:color/white"
+        app:strokeWidth="2dp"
+        app:shapeAppearance="@style/RoundedStyle"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_overflow"
+        android:layout_toRightOf="@+id/iv_avatar"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_avatars_add"
+        app:strokeColor="@android:color/white"
+        android:visibility="visible"
+        android:layout_marginStart="-12dp"
+        app:strokeWidth="2dp"
+        app:shapeAppearance="@style/RoundedStyle"/>
+
+</RelativeLayout>

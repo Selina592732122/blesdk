@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF6F6F8"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/ivBg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_control2"/>
+
+    <View
+        android:id="@+id/statusBarView"
+        android:layout_width="match_parent"
+        android:layout_height="24dp" />
+
+    <RelativeLayout
+        android:layout_below="@+id/statusBarView"
+        android:id="@+id/titleLayout"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/titleBackBtn"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:padding="10dp"
+            android:src="@drawable/ic_title_back"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/vehicle_control"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/ivBg"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:visibility="visible"
+            android:id="@+id/llAir"
+            android:layout_width="match_parent"
+            android:paddingLeft="13dp"
+            android:paddingRight="13dp"
+            android:paddingTop="20dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="12dp"
+            android:paddingBottom="20dp"
+            android:background="@drawable/bg_white_radius8_shape"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/air_control"
+                android:textColor="#cc000000"
+                android:textSize="14sp"
+                android:gravity="center_vertical"
+                android:drawablePadding="8dp"
+                android:drawableEnd="@drawable/ic_enter_arrow"
+                android:drawableStart="@drawable/ic_chushuang"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llSeat"
+            android:layout_width="match_parent"
+            android:paddingLeft="13dp"
+            android:paddingRight="13dp"
+            android:paddingTop="20dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="12dp"
+            android:paddingBottom="20dp"
+            android:background="@drawable/bg_white_radius8_shape"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="座椅加热"
+                android:textColor="#cc000000"
+                android:textSize="14sp"
+                android:gravity="center_vertical"
+                android:drawablePadding="8dp"
+                android:drawableEnd="@drawable/ic_enter_arrow"
+                android:drawableStart="@drawable/ic_seat_heat"/>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/llWindow"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:paddingLeft="13dp"
+            android:paddingRight="13dp"
+            android:paddingTop="20dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="12dp"
+            android:paddingBottom="20dp"
+            android:background="@drawable/bg_white_radius8_shape"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="车窗控制"
+                android:textColor="#cc000000"
+                android:textSize="14sp"
+                android:gravity="center_vertical"
+                android:drawablePadding="8dp"
+                android:drawableEnd="@drawable/ic_enter_arrow"
+                android:drawableStart="@drawable/ic_window_control"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llCharge"
+            android:layout_width="match_parent"
+            android:paddingLeft="13dp"
+            android:paddingRight="13dp"
+            android:paddingTop="20dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="12dp"
+            android:paddingBottom="20dp"
+            android:background="@drawable/bg_white_radius8_shape"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/scheduled_charging"
+                android:textColor="#cc000000"
+                android:textSize="14sp"
+                android:gravity="center_vertical"
+                android:drawablePadding="8dp"
+                android:drawableEnd="@drawable/ic_enter_arrow"
+                android:drawableStart="@drawable/ic_chongdian"/>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

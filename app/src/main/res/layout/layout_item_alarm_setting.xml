@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    android:orientation="horizontal"
+    android:paddingLeft="15dp"
+    android:paddingTop="10dp"
+    android:paddingRight="15dp"
+    android:paddingBottom="10dp">
+
+    <TextView
+        android:id="@+id/itemAlarmTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:textColor="#E6000000"
+        android:textSize="14sp"
+        tools:text="位移告警" />
+
+    <Switch
+        android:id="@+id/itemAlarmSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:switchMinWidth="20dp"
+        android:textOff=""
+        android:textOn=""
+        android:thumb="@drawable/selector_switch_thumb"
+        android:track="@drawable/selector_switch_track"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+</LinearLayout>

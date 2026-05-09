@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.shenghao.widget.SwipeMenuLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:layout_marginBottom="10dp"
+    android:focusable="true"
+    android:paddingBottom="1dp">
+
+    <LinearLayout
+        android:id="@+id/llItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:id="@+id/itemNoticeDateTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="8dp"
+            android:textColor="#99000000"
+            android:textSize="14sp"
+            tools:text="今日" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_white_radius_shape"
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingTop="12dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/itemNoticeIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_notify_msg_default" />
+
+                <TextView
+                    android:id="@+id/itemNoticeTitleTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:textColor="#FF181818"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    tools:text="充电结束通知" />
+
+                <View
+                    android:id="@+id/itemNoticeRedDot"
+                    android:layout_width="7dp"
+                    android:layout_height="7dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/shape_red_dot" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="28dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/itemNoticeContentTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:lineSpacingExtra="3dp"
+                    android:maxLines="2"
+                    android:textColor="#E6000000"
+                    android:textSize="14sp"
+                    tools:text="您的爱车已充电完成" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="28dp"
+                android:id="@+id/itemNoticeTimeTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#99000000"
+                android:textSize="14sp"
+                tools:text="2024-6-29" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- 以下都是侧滑菜单的内容依序排列 -->
+    <LinearLayout
+        android:id="@+id/llDel"
+        android:layout_width="60dp"
+        android:background="@drawable/bg_red_radius_shape"
+        android:gravity="center"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="24dp"
+            android:src="@drawable/ic_delete_white"
+            android:layout_gravity="center"
+            android:layout_height="24dp"/>
+        
+    </LinearLayout>
+    
+
+</com.shenghao.widget.SwipeMenuLayout>
+
+

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+        android:layout_width="56dp"
+        android:src="@drawable/ic_search_bluetooth"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_height="56dp"/>
+    <!--中心imageView-->
+    <ImageView
+        android:id="@+id/iv_wave"
+        android:layout_width="116dp"
+        android:layout_height="116dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/shape_circle" />
+    <!--中间的imageView-->
+    <ImageView
+        android:id="@+id/iv_wave_1"
+        android:layout_width="116dp"
+        android:layout_height="116dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/shape_circle" />
+    <!--最外层imageView-->
+    <ImageView
+        android:id="@+id/iv_wave_2"
+        android:layout_width="116dp"
+        android:layout_height="116dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/shape_circle" />
+</FrameLayout>

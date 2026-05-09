@@ -1,0 +1,92 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.ShengHao" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/transparent</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="IosBottomSheetDialog" parent="android:Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowAnimationStyle">@style/BottomSheetDialogAnim</item>
+    </style>
+
+    <style name="BottomSheetDialogAnim" parent="android:Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/dialog_bottom_sheet_enter</item>
+        <item name="android:windowExitAnimation">@anim/dialog_bottom_sheet_exit</item>
+    </style>
+
+    <style name="Common_Dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <!--边框-->
+        <item name="android:windowIsFloating">true</item>
+        <!--是否浮现在activity之上-->
+        <item name="android:windowIsTranslucent">false</item>
+        <!--半透明-->
+        <item name="android:windowNoTitle">true</item>
+        <!--无标题-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--背景透明-->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!--模糊-->
+    </style>
+    <style name="Common_Dialog2" parent="Theme.AppCompat.Dialog">
+        <!-- 全屏对话框 -->
+        <item name="android:windowIsFloating">false</item>
+
+        <!-- 无背景 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+
+        <!-- 无标题栏 -->
+        <item name="android:windowNoTitle">true</item>
+
+        <!-- 允许延伸到边缘 -->
+        <item name="android:windowCloseOnTouchOutside">false</item>
+
+        <!-- 状态栏透明 -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item> <!-- 可选：亮色状态栏图标 -->
+    </style>
+
+    <style name="ProgressDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:background">@drawable/custom_progress_dialog_background</item>
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:textColorPrimary">@color/white</item>
+    </style>
+
+    <style name="TransparentProgressDialogTheme" parent="@android:style/Theme.Holo.Dialog">
+        <!-- 是否有边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!--是否在悬浮Activity之上  -->
+        <item name="android:windowIsFloating">true</item>
+        <!--标题  -->
+        <item name="android:windowNoTitle">true</item>
+        <!--阴影  -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!--透明背景-->
+        <item name="android:background">@android:color/transparent</item>
+        <!--窗口背景透明-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--弹窗背景是否变暗-->
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+    <!-- res/values/styles.xml -->
+    <style name="TransparentDialogTheme" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowIsTranslucent">true</item> <!-- 设置窗口透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item> <!-- 设置背景透明 -->
+        <item name="android:windowNoTitle">true</item> <!-- 去掉标题栏 -->
+        <item name="android:windowFullscreen">true</item> <!-- 全屏 -->
+        <item name="android:windowContentOverlay">@null</item> <!-- 去掉内容覆盖 -->
+    </style>
+</resources>

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#FFEFF2FA"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:src="@drawable/bg_share_top"
+        android:scaleType="centerCrop"
+        android:layout_height="354dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <View
+            android:id="@+id/statusBarView"
+            android:layout_width="match_parent"
+            android:layout_height="24dp" />
+        <RelativeLayout
+            android:id="@+id/titleLayout"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/titleBackBtn"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:padding="10dp"
+                android:src="@drawable/ic_title_back"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvShare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="HB1500DZH-4的共享"
+            android:textColor="#ff181818"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="46dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="#FF3C86FC"
+                android:textSize="52sp"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_marginLeft="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/person_num"
+                android:textColor="#99000000"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llInvite"
+            android:layout_marginBottom="12dp"
+            android:layout_width="match_parent"
+            android:background="@drawable/bg_white_radius_shape"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/choose_share_way"
+                android:textColor="#ff181818"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:id="@+id/llCode"
+                android:layout_width="match_parent"
+                android:background="@drawable/bg_gray_radius8_shape"
+                android:layout_marginTop="16dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="@string/share_way_qrcode"
+                    android:drawablePadding="8dp"
+                    android:textColor="#ff1a1a1a"
+                    android:textSize="14sp"
+                    android:drawableStart="@drawable/ic_share_qrcode"/>
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_avatar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_enter_arrow"
+                    android:background="#0F000000"
+                    android:layout_gravity="center"
+                    android:padding="15dp"
+                    app:strokeColor="@android:color/white"
+                    app:shapeAppearance="@style/RoundedStyle"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llAcount"
+                android:layout_width="match_parent"
+                android:background="@drawable/bg_gray_radius8_shape"
+                android:layout_marginTop="12dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="@string/share_way_account"
+                    android:drawablePadding="8dp"
+                    android:textColor="#ff1a1a1a"
+                    android:textSize="14sp"
+                    android:drawableStart="@drawable/ic_share_account"/>
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_enter_arrow"
+                    android:background="#0F000000"
+                    android:layout_gravity="center"
+                    android:padding="15dp"
+                    app:strokeColor="@android:color/white"
+                    app:shapeAppearance="@style/RoundedStyle"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/llUsers"
+            android:layout_width="match_parent"
+            android:background="@drawable/bg_white_radius_shape"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tvShareUser"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    tools:text="共享用户（2/3）"
+                    android:textColor="#ff181818"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/share_limit"
+                    android:textColor="#ffcc0404"
+                    android:textSize="12sp"
+                    android:id="@+id/tvEnough"/>
+            </LinearLayout>
+
+            <com.shenghao.widget.EmptyRecyclerView
+                android:id="@+id/recyclerViewUser"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/bg_white_radius_shape"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tvEmpty"
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="@drawable/bg_gray_radius8_shape"
+                android:text="@string/has_no_share_users"
+                android:padding="14dp"
+                android:textColor="#99000000"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvExit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/exit_share"
+            android:visibility="gone"
+            android:gravity="center"
+            android:layout_margin="16dp"
+            android:padding="17dp"
+            android:textColor="#FF3C86FC"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_gray_02_radius_shape"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+</RelativeLayout>

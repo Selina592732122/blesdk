@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF6F6F8"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/ivBg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_seat_control"/>
+
+    <View
+        android:id="@+id/statusBarView"
+        android:layout_width="match_parent"
+        android:layout_height="24dp" />
+
+    <RelativeLayout
+        android:layout_below="@+id/statusBarView"
+        android:id="@+id/titleLayout"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/titleBackBtn"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:padding="10dp"
+            android:src="@drawable/ic_title_back"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="座椅加热"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="24dp"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/llForeground"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/bg_white_radius12_shape"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="24dp"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvMode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="制冷"
+                android:text="-"
+                android:textStyle="bold"
+                android:textColor="#ff1a1a1a"
+                android:textSize="28sp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="前排模式"
+                android:textColor="#99000000"
+                android:textSize="12sp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="30dp"
+                android:gravity="center_vertical"
+                android:layout_height="wrap_content"> <!-- 浅蓝色背景 -->
+
+                <RadioGroup
+                    android:id="@+id/rgFan"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:id="@+id/rbFan1"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:text="温暖"
+                        android:drawablePadding="12dp"
+                        android:gravity="center"
+                        android:drawableTop="@drawable/selector_fan_one"
+                        android:textColor="#ff1a1a1a"
+                        android:textSize="13sp"
+                        android:layout_height="wrap_content"/>
+
+                    <RadioButton
+                        android:id="@+id/rbFan2"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:text="炙热"
+                        android:drawablePadding="12dp"
+                        android:gravity="center"
+                        android:drawableTop="@drawable/selector_fan_two"
+                        android:textColor="#ff1a1a1a"
+                        android:textSize="13sp"
+                        android:layout_height="wrap_content"/>
+                    <RadioButton
+                        android:id="@+id/rbFan3"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:text="自动"
+                        android:drawablePadding="12dp"
+                        android:gravity="center"
+                        android:drawableTop="@drawable/selector_fan_three"
+                        android:textColor="#ff1a1a1a"
+                        android:textSize="13sp"
+                        android:layout_height="wrap_content"/>
+                </RadioGroup>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llBtn"
+            android:layout_width="match_parent"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/bg_blue_ok_radius_shape"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tvBtn"
+                android:layout_width="wrap_content"
+                android:text="前排关闭"
+                android:drawablePadding="10dp"
+                android:textColor="#ffffffff"
+                android:textSize="14sp"
+                android:padding="14dp"
+                android:gravity="center"
+                android:drawableStart="@drawable/ic_air_power"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llBackground"
+            android:layout_width="match_parent"
+            android:layout_marginTop="12dp"
+            android:orientation="vertical"
+            android:background="@drawable/bg_white_radius12_shape"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="24dp"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvModeBackground"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="制冷"
+                android:text="-"
+                android:textStyle="bold"
+                android:textColor="#ff1a1a1a"
+                android:textSize="28sp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="后排模式"
+                android:textColor="#99000000"
+                android:textSize="12sp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="30dp"
+                android:gravity="center_vertical"
+                android:layout_height="wrap_content">
+
+                <RadioGroup
+                    android:id="@+id/rgFanBackground"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:id="@+id/rbFan1Background"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:text="温暖"
+                        android:drawablePadding="12dp"
+                        android:gravity="center"
+                        android:drawableTop="@drawable/selector_fan_one"
+                        android:textColor="#ff1a1a1a"
+                        android:textSize="13sp"
+                        android:layout_height="wrap_content"/>
+
+                    <RadioButton
+                        android:id="@+id/rbFan2Background"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:text="炙热"
+                        android:drawablePadding="12dp"
+                        android:gravity="center"
+                        android:drawableTop="@drawable/selector_fan_two"
+                        android:textColor="#ff1a1a1a"
+                        android:textSize="13sp"
+                        android:layout_height="wrap_content"/>
+                    <RadioButton
+                        android:id="@+id/rbFan3Background"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:text="自动"
+                        android:drawablePadding="12dp"
+                        android:gravity="center"
+                        android:drawableTop="@drawable/selector_fan_three"
+                        android:textColor="#ff1a1a1a"
+                        android:textSize="13sp"
+                        android:layout_height="wrap_content"/>
+                </RadioGroup>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llBtnBackground"
+            android:layout_width="match_parent"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/bg_blue_ok_radius_shape"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tvBtnBackground"
+                android:layout_width="wrap_content"
+                android:text="后排关闭"
+                android:drawablePadding="10dp"
+                android:textColor="#ffffffff"
+                android:textSize="14sp"
+                android:padding="14dp"
+                android:gravity="center"
+                android:drawableStart="@drawable/ic_air_power"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>

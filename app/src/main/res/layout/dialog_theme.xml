@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_gravity="center_horizontal"
+        android:layout_width="227dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="match_parent"
+            android:src="@drawable/bg_main_my"
+            android:scaleType="centerCrop"
+            android:background="@color/white"
+            android:layout_height="316dp"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tvUse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="使用皮肤"
+        android:textColor="@color/white"
+        android:background="@drawable/switch_track_blue"
+        android:textSize="14sp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:layout_marginTop="30dp" />
+</LinearLayout>

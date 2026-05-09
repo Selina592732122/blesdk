@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ImageForegroundImageView">
+        <!-- 背景图片资源 -->
+        <attr name="backgroundSrc" format="reference" />
+        <!-- 前景圆环图片资源 -->
+        <attr name="foregroundSrc" format="reference" />
+        <!-- 前景可见性 -->
+        <attr name="foregroundVisibility" format="enum">
+            <enum name="visible" value="0" />
+            <enum name="invisible" value="1" />
+            <enum name="gone" value="2" />
+        </attr>
+        <!-- 旋转持续时间（单位：毫秒） -->
+        <attr name="rotationDuration" format="integer" />
+    </declare-styleable>
+    <declare-styleable name="JoystickView">
+        <attr name="directionType" format="enum">
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="SwipeMenuLayout">
+        <attr name="swipeEnable" format="boolean"/>
+        <attr name="ios" format="boolean"/>
+        <attr name="leftSwipe" format="boolean"/>
+    </declare-styleable>
+    <declare-styleable name="PasswordEditText">
+        <attr name="hint" format="string"/>
+        <attr name="background" format="reference"/>
+        <attr name="textColor" format="color"/>
+        <attr name="textColorHint" format="color"/>
+    </declare-styleable>
+    <declare-styleable name="SpreadView">
+        <!--中心圆颜色-->
+        <attr name="spread_center_color" format="color"/>
+        <!--中心圆半径-->
+        <attr name="spread_radius" format="integer"/>
+        <!--扩散圆颜色-->
+        <attr name="spread_spread_color" format="color"/>
+        <!--扩散间距-->
+        <attr name="spread_distance" format="integer"/>
+        <!--扩散最大半径-->
+        <attr name="spread_max_radius" format="integer"/>
+        <!--扩散延迟间隔-->
+        <attr name="spread_delay_milliseconds" format="integer"/>
+    </declare-styleable>
+    <declare-styleable name="VerificationCodeView">
+        <!--验证码个数-->
+        <attr name="code_num" format="integer"/>
+    </declare-styleable>
+</resources>

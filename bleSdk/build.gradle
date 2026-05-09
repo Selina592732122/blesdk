@@ -44,9 +44,15 @@ afterEvaluate {
             publishing {
                 publications {
                     "${variant.name}"(MavenPublication) {
+                        artifactId = "${project.name}-${variant.name}"
                         artifact("$buildDir/outputs/aar/${project.name}-${variant.name}.aar")
                     }
                 }
+            }
+            
+            // 让publish任务依赖于assemble任务
+            tasks.named("publish${variant.name.capitalize()}PublicationToMavenLocal") {
+                dependsOn("assemble${variant.name.capitalize()}")
             }
         }
     }

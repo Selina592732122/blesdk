@@ -2,5 +2,7 @@ jdk:
   - openjdk17
 before_install:
   - chmod +x gradlew
+  - mkdir -p gradle/wrapper
+  - curl -sL "https://raw.githubusercontent.com/gradle/gradle/v8.9.0/gradle/wrapper/gradle-wrapper.jar" -o gradle/wrapper/gradle-wrapper.jar
 install:
   - ./gradlew :bleSdk:assembleRelease --no-daemon

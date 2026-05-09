@@ -1,9 +1,6 @@
 # Gradle files
 .gradle/
 build/
-*.gradle
-*.gradle.kts
-!gradle/wrapper/gradle-wrapper.jar
 
 # Local configuration
 local.properties

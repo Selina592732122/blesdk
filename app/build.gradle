@@ -1,0 +1,122 @@
+plugins {
+    alias(libs.plugins.android.application)
+}
+
+android {
+    namespace 'com.shenghao'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "com.shenghao"
+        minSdk 24
+        targetSdk 35
+        versionCode 185
+        versionName "1.8.5"
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : applicationId,
+                //JPush 上注册的包名对应的 Appkey.
+                JPUSH_APPKEY : "53952366a9a782aa1b9080da",
+                //暂时填写默认值即可.
+                JPUSH_CHANNEL : "developer-default",
+        ]
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file('../app/shenghao.jks')
+            storePassword '123456'
+            keyAlias 'shenghao'
+            keyPassword '123456'
+        }
+        release {
+            storeFile file('../app/shenghao.jks')
+            storePassword '123456'
+            keyAlias 'shenghao'
+            keyPassword '123456'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+//        release {
+//            minifyEnabled false      // 启用代码压缩和混淆
+//            shrinkResources true    // 启用资源压缩（可选）
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+//            signingConfig signingConfigs.debug
+//        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+
+    implementation libs.appcompat
+    implementation libs.material
+//    implementation files('libs\\AMap3DMap_10.0.600_AMapLocation_6.4.3_20240314.jar')
+//    implementation files('libs\\AMap_Search_V9.4.0_20220808.jar')
+    implementation libs.xdmap.location.search//高德地图
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
+
+    implementation "com.alibaba:fastjson:1.2.83"
+
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.3'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+    implementation 'com.squareup.okhttp3:okhttp-sse:4.9.3'
+
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.5'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+
+//    implementation 'com.guolindev.permissionx:permissionx:1.6.0'
+
+    implementation 'com.github.bumptech.glide:glide:4.14.2'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
+
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.9'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation project(':bleSdk')
+//    implementation 'com.github.Selina592732122:blesdk:v1.0.0'
+
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+
+//    implementation  'io.github.scwang90:refresh-layout-kernel:2.0.5'      //核心必须依赖
+//    implementation  'io.github.scwang90:refresh-header-material:2.0.5'    //谷歌刷新头
+//    implementation  'io.github.scwang90:refresh-header-classics:2.0.5'    //经典刷新头
+
+    implementation  'io.github.scwang90:refresh-layout-kernel:3.0.0-alpha'      //核心必须依赖
+    implementation  'io.github.scwang90:refresh-header-classics:3.0.0-alpha'    //经典刷新头
+    implementation  'io.github.scwang90:refresh-header-material:3.0.0-alpha'    //谷歌刷新头
+
+    implementation 'com.huawei.hms:scanplus:2.12.0.301'
+
+    implementation 'com.akexorcist:round-corner-progress-bar:2.2.1'
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android:+'
+    implementation 'com.github.Jasonchenlijian:FastBle:2.4.0'
+//    implementation 'com.github.getActivity:XXPermissions:20.0'
+    implementation 'com.github.getActivity:XXPermissions:26.5'
+    implementation 'com.github.hackware1993:MagicIndicator:1.7.0' // for androidx
+    // 此处以JPush 5.6.0 版本为例，注意：从 5.0.0 版本开始可以自动拉取 JCore 包，无需另外配置
+//    implementation 'cn.jiguang.sdk:jpush:5.6.0'
+//    implementation 'com.github.barteksc:android-pdf-viewer:3.2.0-beta.1'
+    implementation 'com.github.marain87:AndroidPdfViewer:3.2.8'
+    api 'com.tencent.mm.opensdk:wechat-sdk-android:+'
+    implementation 'com.tencent.bugly:crashreport:latest.release'
+    implementation libs.core
+}

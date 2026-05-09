@@ -1,6 +1,7 @@
 jdk:
   - openjdk11
 before_install:
+  - chmod +x gradlew
   - ./gradlew build -x test --no-daemon
 install:
   - ./gradlew :bleSdk:assembleRelease --no-daemon

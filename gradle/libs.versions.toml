@@ -18,4 +18,5 @@ xdmap-location-search = { module = "com.amap.api:3dmap-location-search", version
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
 

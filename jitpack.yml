@@ -1,10 +1,6 @@
 jdk:
-  - openjdk11
+  - openjdk17
 before_install:
   - chmod +x gradlew
-  - curl -s "https://get.sdkman.io" | bash
-  - source "$HOME/.sdkman/bin/sdkman-init.sh"
-  - sdk install gradle 8.9
-  - sdk use gradle 8.9
 install:
-  - gradle :bleSdk:assembleRelease --no-daemon
+  - ./gradlew :bleSdk:assembleRelease --no-daemon

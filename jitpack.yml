@@ -2,6 +2,6 @@ jdk:
   - openjdk11
 before_install:
   - chmod +x gradlew
-  - ./gradlew build -x test --no-daemon
+  - gradle wrapper --gradle-version 8.9
 install:
   - ./gradlew :bleSdk:assembleRelease --no-daemon

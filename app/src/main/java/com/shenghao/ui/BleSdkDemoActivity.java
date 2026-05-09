@@ -25,7 +25,10 @@ import com.clj.fastble.data.BleDevice;
 import com.clj.fastble.exception.BleException;
 import com.shenghao.R;
 import com.shenghao.blesdk.BleSdk;
+import com.shenghao.blesdk.api.CommandApi;
+import com.shenghao.blesdk.api.PkeCommandApi;
 import com.shenghao.blesdk.callback.BleConnectCallback;
+import com.shenghao.blesdk.callback.BleNotifyCallback;
 import com.shenghao.blesdk.callback.BleScanCallback;
 import com.shenghao.blesdk.callback.BleStateListener;
 import com.shenghao.blesdk.enums.BlueRssiPke;
@@ -38,6 +41,7 @@ import com.shenghao.blesdk.receiver.BluetoothReceiver;
 import com.shenghao.blesdk.service.BluetoothService;
 import com.shenghao.blesdk.utils.BleConfigManager;
 import com.shenghao.blesdk.utils.BlePermissionManager;
+import com.shenghao.blesdk.utils.ByteUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +66,7 @@ public class BleSdkDemoActivity extends BaseActivity {
     private Button btnPkeStrong;
     private Button btnReadPke;
     private Button btnPair;
+    private Button btnNotify;
     private Switch switchPKE;
     private ProgressBar progressBar;
 
@@ -104,6 +109,7 @@ public class BleSdkDemoActivity extends BaseActivity {
         btnPkeStrong = findViewById(R.id.btn_pke_strong);
         btnReadPke = findViewById(R.id.btn_read_pke);
         btnPair = findViewById(R.id.btn_pair);
+        btnNotify = findViewById(R.id.btn_notify);
         switchPKE = findViewById(R.id.switch_pke);
         progressBar = findViewById(R.id.progress_bar);
     }
@@ -206,6 +212,11 @@ public class BleSdkDemoActivity extends BaseActivity {
             if (!isBonded) {
                 startPairing();
             }
+        });
+
+        btnNotify.setOnClickListener(v -> {
+            if (!checkDeviceConnected()) return;
+            enableNotification();
         });
 
         switchPKE.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -314,7 +325,40 @@ public class BleSdkDemoActivity extends BaseActivity {
         btnPkeStrong.setEnabled(enabled && isBonded);
         btnReadPke.setEnabled(enabled);
         btnPair.setEnabled(enabled && !isBonded);
+        btnNotify.setEnabled(enabled);
         switchPKE.setEnabled(enabled);
+    }
+
+    private void enableNotification() {
+        tvStatus.setText("正在打开通知...");
+        btnNotify.setEnabled(false);
+
+        CommandApi.setNotifyListener(selectedDevice, new BleNotifyCallback() {
+            @Override
+            public void onNotifySuccess() {
+                runOnUiThread(() -> {
+                    tvStatus.setText("通知已打开，正在监听设备数据...");
+                    btnNotify.setText("通知已打开");
+                    Toast.makeText(BleSdkDemoActivity.this, "通知已打开", Toast.LENGTH_SHORT).show();
+                });
+            }
+
+            @Override
+            public void onNotifyFailed(BleException exception) {
+                runOnUiThread(() -> {
+                    tvStatus.setText("通知打开失败: " + exception.getDescription());
+                    btnNotify.setText("打开通知");
+                    btnNotify.setEnabled(true);
+                    Toast.makeText(BleSdkDemoActivity.this, "通知打开失败", Toast.LENGTH_SHORT).show();
+                });
+            }
+
+            @Override
+            public void onCharacteristicChanged(byte[] data) {
+                String hex = ByteUtils.bytes2HexStr(data);
+                Log.d(TAG, "收到数据: " + hex);
+            }
+        });
     }
 
     private void startScan() {
@@ -376,35 +420,59 @@ public class BleSdkDemoActivity extends BaseActivity {
     }
 
     private void startPairing() {
-        tvStatus.setText("开始配对...");
+        tvStatus.setText("配对初始化...");
+        btnPair.setEnabled(false);
         progressBar.setVisibility(View.VISIBLE);
 
         pairingManager.startPairing(new PairingManager.SimplePairingCallback() {
             @Override
             public void onPairingRequest(BluetoothDevice device, int variant) {
-                tvStatus.setText("正在配对...");
+                runOnUiThread(() -> {
+                    tvStatus.setText("配对请求已发送，等待设备响应...");
+                    Toast.makeText(BleSdkDemoActivity.this, "配对请求已发送", Toast.LENGTH_SHORT).show();
+                });
             }
 
             @Override
             public void onPairingInProgress() {
-                tvStatus.setText("配对中...");
+                runOnUiThread(() -> {
+                    tvStatus.setText("配对中，请注意设备上的配对确认...");
+                    btnPair.setText("配对中");
+                });
             }
 
             @Override
             public void onPairingSuccess() {
-                progressBar.setVisibility(View.GONE);
-                tvStatus.setText("配对成功");
-                isBonded = true;
-                btnPair.setText("已配对");
-                btnPair.setEnabled(false);
-                enablePkeButtons(true);
+                runOnUiThread(() -> {
+                    progressBar.setVisibility(View.GONE);
+                    tvStatus.setText("配对成功！设备已绑定");
+                    isBonded = true;
+                    btnPair.setText("已配对");
+                    btnPair.setEnabled(false);
+                    enablePkeButtons(true);
+                    Toast.makeText(BleSdkDemoActivity.this, "配对成功", Toast.LENGTH_SHORT).show();
+                });
             }
 
             @Override
             public void onPairingFailed(String errorMessage) {
-                progressBar.setVisibility(View.GONE);
-                tvStatus.setText("配对失败: " + errorMessage);
-                Toast.makeText(BleSdkDemoActivity.this, "配对失败: " + errorMessage, Toast.LENGTH_SHORT).show();
+                runOnUiThread(() -> {
+                    progressBar.setVisibility(View.GONE);
+                    tvStatus.setText("配对失败: " + errorMessage);
+                    btnPair.setText("去配对");
+                    btnPair.setEnabled(selectedDevice != null);
+                    Toast.makeText(BleSdkDemoActivity.this, "配对失败: " + errorMessage, Toast.LENGTH_SHORT).show();
+                });
+            }
+
+            @Override
+            public void onPairingCancelled() {
+                runOnUiThread(() -> {
+                    progressBar.setVisibility(View.GONE);
+                    tvStatus.setText("配对已取消");
+                    btnPair.setText("去配对");
+                    btnPair.setEnabled(selectedDevice != null);
+                });
             }
         });
     }

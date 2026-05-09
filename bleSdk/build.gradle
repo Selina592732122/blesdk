@@ -38,15 +38,15 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.1.1'
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                from components.release
-                groupId = 'com.github.Selina592732122'
-                artifactId = 'blesdk'
-                version = '1.0.3'
-            }
-        }
-    }
-}
+//afterEvaluate {
+//    publishing {
+//        publications {
+//            release(MavenPublication) {
+//                from components.release
+//                groupId = 'com.github.Selina592732122'
+//                artifactId = 'blesdk'
+//                version = '1.0.3'
+//            }
+//        }
+//    }
+//}

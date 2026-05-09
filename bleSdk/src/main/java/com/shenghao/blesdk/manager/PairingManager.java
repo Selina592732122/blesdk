@@ -78,7 +78,7 @@ public class PairingManager {
                         isBonded = false;
                         if (previousBondState == BluetoothDevice.BOND_BONDING) {
                             if (pairingCallback != null) {
-                                pairingCallback.onPairingFailed("配对被取消");
+                                pairingCallback.onPairingCancelled();
                             }
                             BleConnectionManager connectionManager = com.shenghao.blesdk.BleSdk.getInstance().getBleConnectionManager();
                             connectionManager.setAutoConnectEnabled(true);
@@ -302,6 +302,7 @@ public class PairingManager {
         void onPairingInProgress();
         void onPairingSuccess();
         void onPairingFailed(String errorMessage);
+        void onPairingCancelled();
     }
 
     public static abstract class SimplePairingCallback implements PairingCallback {
@@ -316,5 +317,8 @@ public class PairingManager {
 
         @Override
         public void onPairingFailed(String errorMessage) {}
+
+        @Override
+        public void onPairingCancelled() {}
     }
 }

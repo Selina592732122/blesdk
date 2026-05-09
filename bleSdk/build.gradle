@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.library'
+    id 'maven-publish'
 }
 
 android {
@@ -35,4 +36,14 @@ dependencies {
 
     implementation 'com.github.Jasonchenlijian:FastBle:2.4.0'
     implementation 'org.greenrobot:eventbus:3.1.1'
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+            }
+        }
+    }
 }

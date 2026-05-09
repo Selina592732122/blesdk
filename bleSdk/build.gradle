@@ -1,6 +1,5 @@
 plugins {
     id 'com.android.library'
-    id 'maven-publish'
 }
 
 android {
@@ -36,35 +35,4 @@ dependencies {
 
     implementation 'com.github.Jasonchenlijian:FastBle:2.4.0'
     implementation 'org.greenrobot:eventbus:3.1.1'
-}
-
-task createSdkJar(type: Jar) {
-    archiveFileName = 'blesdk-1.0.0.jar'
-    destinationDirectory = file("$rootDir/release")
-
-    from android.sourceSets.main.java.srcDirs
-    from android.sourceSets.main.res.srcDirs
-}
-
-afterEvaluate {
-    assembleRelease.finalizedBy createSdkJar
-}
-
-publishing {
-    publications {
-        release(MavenPublication) {
-            artifact("$buildDir/outputs/aar/bleSdk-release.aar")
-            artifact(createSdkJar)
-
-            groupId = 'com.github.Selina592732122'
-            artifactId = 'blesdk'
-            version = '1.0.1'
-
-            pom {
-                name = 'blesdk'
-                description = 'Bluetooth BLE SDK'
-                url = 'https://github.com/Selina592732122/blesdk'
-            }
-        }
-    }
 }

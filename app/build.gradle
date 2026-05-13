@@ -91,8 +91,8 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
 
     implementation 'org.greenrobot:eventbus:3.1.1'
-    implementation project(':bleSdk')
-//    implementation 'com.github.Selina592732122:blesdk:v1.0.9'
+//    implementation project(':bleSdk')
+    implementation 'com.github.Selina592732122:blesdk:v1.1.0'
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
@@ -108,7 +108,7 @@ dependencies {
 
     implementation 'com.akexorcist:round-corner-progress-bar:2.2.1'
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android:+'
-    implementation 'com.github.Jasonchenlijian:FastBle:2.4.0'
+//    implementation 'com.github.Jasonchenlijian:FastBle:2.4.0'
 //    implementation 'com.github.getActivity:XXPermissions:20.0'
     implementation 'com.github.getActivity:XXPermissions:26.5'
     implementation 'com.github.hackware1993:MagicIndicator:1.7.0' // for androidx

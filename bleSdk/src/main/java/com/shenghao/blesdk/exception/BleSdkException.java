@@ -1,8 +1,6 @@
 package com.shenghao.blesdk.exception;
 
-import com.clj.fastble.exception.BleException;
-
-public class BleSdkException extends BleException {
+public class BleSdkException extends Exception {
 
     public static final int CODE_NULL = 1000;
     public static final int CODE_CONNECTING = 1001;
@@ -13,17 +11,15 @@ public class BleSdkException extends BleException {
     private String description;
 
     public BleSdkException(int code, String description) {
-        super(code,description);
+        super(description);
         this.code = code;
         this.description = description;
     }
 
-    @Override
     public int getCode() {
         return code;
     }
 
-    @Override
     public String getDescription() {
         return description;
     }

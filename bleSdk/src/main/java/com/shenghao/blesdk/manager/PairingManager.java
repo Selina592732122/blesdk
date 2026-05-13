@@ -128,8 +128,8 @@ public class PairingManager {
         }
     }
 
-    public void setBleDevice(BleDevice bleDevice) {
-        this.bleDevice = bleDevice;
+    public void setBleDevice(com.shenghao.blesdk.entity.BleSdkDevice bleDevice) {
+        this.bleDevice = bleDevice.getOriginalDevice();
         updateBondState();
     }
 

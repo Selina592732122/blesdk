@@ -54,8 +54,8 @@ public class OneKeyParkingManager {
         return instance;
     }
 
-    public void setBleDevice(BleDevice device) {
-        this.bleDevice = device;
+    public void setBleDevice(com.shenghao.blesdk.entity.BleSdkDevice device) {
+        this.bleDevice = device.getOriginalDevice();
     }
 
     public BleDevice getBleDevice() {

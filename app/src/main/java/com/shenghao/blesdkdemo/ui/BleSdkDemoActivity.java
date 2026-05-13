@@ -130,7 +130,7 @@ public class BleSdkDemoActivity extends BaseActivity {
 
     private void updateBondState(BleSdkDevice device) {
         if (pairingManager != null && device != null) {
-            pairingManager.setBleDevice(device.getOriginalDevice());
+            pairingManager.setBleDevice(device);
             isBonded = pairingManager.isBonded();
             btnPair.setText(isBonded ? "已配对" : "去配对");
             btnPair.setEnabled(!isBonded && selectedDevice != null);
@@ -287,8 +287,8 @@ public class BleSdkDemoActivity extends BaseActivity {
                 public void onConnected(String mac, BleSdkDevice device) {
                     tvStatus.setText("已连接: " + device.getName() + " (" + mac + ")");
                     tvConnectedDevice.setText("当前已连接: " + (TextUtils.isEmpty(device.getName()) ? "未知设备" : device.getName()) + " (" + mac + ")");
-                    parkingManager.setBleDevice(device.getOriginalDevice());
-                    pairingManager.setBleDevice(device.getOriginalDevice());
+                    parkingManager.setBleDevice(device);
+                    pairingManager.setBleDevice(device);
                     enableParkingButtons(true);
                     enablePkeButtons(true);
                     updateBondState(device);
@@ -326,8 +326,8 @@ public class BleSdkDemoActivity extends BaseActivity {
             if (device != null) {
                 tvConnectedDevice.setText("当前已连接: " + (TextUtils.isEmpty(device.getName()) ? "未知设备" : device.getName()) + " (" + savedMac + ")");
                 selectedDevice = device;
-                parkingManager.setBleDevice(device.getOriginalDevice());
-                pairingManager.setBleDevice(device.getOriginalDevice());
+                parkingManager.setBleDevice(device);
+                pairingManager.setBleDevice(device);
                 enableParkingButtons(true);
                 updateBondState(device);
                 return;

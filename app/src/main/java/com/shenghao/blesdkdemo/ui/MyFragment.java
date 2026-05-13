@@ -339,7 +339,7 @@ public class MyFragment extends BaseFragment {
         view.findViewById(R.id.llBle).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(requireActivity(),BleActivity.class));
+//                startActivity(new Intent(requireActivity(),BleActivity.class));
             }
         });
 

@@ -14,8 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.TypeReference;
-import com.clj.fastble.BleManager;
-import com.clj.fastble.data.BleDevice;
 import com.shenghao.blesdkdemo.R;
 import com.shenghao.blesdkdemo.bean.BaseHttpResp;
 import com.shenghao.blesdkdemo.bean.NoticeDialogBean;
@@ -28,7 +26,6 @@ import com.shenghao.blesdk.listener.BluetoothStateChangeListener;
 import com.shenghao.blesdk.receiver.BluetoothReceiver;
 import com.shenghao.blesdk.service.BluetoothService;
 import com.shenghao.blesdkdemo.event.AppBackgroundEvent;
-import com.shenghao.blesdkdemo.event.BleStatusEvent;
 import com.shenghao.blesdkdemo.event.RefreshEvent;
 import com.shenghao.blesdkdemo.event.ThemeChangeEvent;
 import com.shenghao.blesdkdemo.okhttp.OkHttpBaseResp;
@@ -90,12 +87,12 @@ public class MainActivity extends BaseActivity {
         @Override
         public void onBluetoothOff() {
             // 蓝牙已关闭
-            List<BleDevice> allConnectedDevice = BleManager.getInstance().getAllConnectedDevice();
-            for (BleDevice device: allConnectedDevice) {
-                BleManager.getInstance().disconnect(device);
-                EventBus.getDefault().post(new BleStatusEvent(BluetoothStatus.DISCONNECTED,device.getMac()));
-            }
-            BluetoothService.updateAutoConnectStatus(MainActivity.this,false);
+//            List<BleDevice> allConnectedDevice = BleManager.getInstance().getAllConnectedDevice();
+//            for (BleDevice device: allConnectedDevice) {
+//                BleManager.getInstance().disconnect(device);
+//                EventBus.getDefault().post(new BleStatusEvent(BluetoothStatus.DISCONNECTED,device.getMac()));
+//            }
+//            BluetoothService.updateAutoConnectStatus(MainActivity.this,false);
 //            if(bluetoothUtils != null)
 //                bluetoothUtils.stop();
         }
@@ -108,16 +105,16 @@ public class MainActivity extends BaseActivity {
         @Override
         public void onBluetoothOn() {
             // 蓝牙已打开
-            List<BleDevice> allConnectedDevice = BleManager.getInstance().getAllConnectedDevice();
-            for (BleDevice device: allConnectedDevice) {
-                EventBus.getDefault().post(new BleStatusEvent(BluetoothStatus.CONNECTED,device.getMac()));
-            }
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    BluetoothService.updateAutoConnectStatus(MainActivity.this,true);
-                }
-            },1000);
+//            List<BleDevice> allConnectedDevice = BleManager.getInstance().getAllConnectedDevice();
+//            for (BleDevice device: allConnectedDevice) {
+//                EventBus.getDefault().post(new BleStatusEvent(BluetoothStatus.CONNECTED,device.getMac()));
+//            }
+//            new Handler().postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    BluetoothService.updateAutoConnectStatus(MainActivity.this,true);
+//                }
+//            },1000);
 //            if(bluetoothUtils != null)
 //                bluetoothUtils.start();
         }
@@ -183,8 +180,8 @@ public class MainActivity extends BaseActivity {
                     for (int i = 0; i < data.size(); i++) {
                         ThemeBean bean = data.get(i);
                         if("1".equals(bean.getIsCurrentTheme())){
-                            if(fragments[0] != null)
-                                ((VehicleFragment)fragments[0]).refreshTheme(bean.getThemeImage());
+//                            if(fragments[0] != null)
+//                                ((VehicleFragment)fragments[0]).refreshTheme(bean.getThemeImage());
                         }
                     }
                 } else {
@@ -362,7 +359,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void updateBle() {
-        ((VehicleFragment)fragments[0]).updateBle();
+//        ((VehicleFragment)fragments[0]).updateBle();
     }
 
     private void selectVehicleTab() {
@@ -395,11 +392,11 @@ public class MainActivity extends BaseActivity {
 
     private void initVehicleFragment() {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        if (fragments[0] == null) {
-            fragments[0] = VehicleFragment.newInstance();
-            transaction.add(R.id.main_fragment_container, fragments[0], "vehicle");
-        }
-        hideExcludeIndex(0, transaction);
+//        if (fragments[0] == null) {
+//            fragments[0] = VehicleFragment.newInstance();
+//            transaction.add(R.id.main_fragment_container, fragments[0], "vehicle");
+//        }
+//        hideExcludeIndex(0, transaction);
     }
 
     private void initStoreFragment() {
@@ -591,15 +588,15 @@ public class MainActivity extends BaseActivity {
             doNoticeListener();
         }
     }
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onBleStatusEvent(BleStatusEvent event){
-//        ToastUtils.showShort(this,"BleStatus");
-        updateBle();
-    }
-    @Subscribe(threadMode = ThreadMode.MAIN)
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    public void onBleStatusEvent(BleStatusEvent event){
+////        ToastUtils.showShort(this,"BleStatus");
+//        updateBle();
+//    }
+//    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onThemeChangeEvent(ThemeChangeEvent event){
-        if(fragments[0] != null)
-            ((VehicleFragment)fragments[0]).refreshTheme(event.getImagePath());
+//        if(fragments[0] != null)
+//            ((VehicleFragment)fragments[0]).refreshTheme(event.getImagePath());
     }
 
 
@@ -615,8 +612,8 @@ public class MainActivity extends BaseActivity {
 
     public void refreshCurrentTerminal() {
         //切换其他设备后，主页车辆信息那些都要刷新
-        if(fragments[0] != null)
-            ((VehicleFragment)fragments[0]).refreshCurrentTerminal();
+//        if(fragments[0] != null)
+//            ((VehicleFragment)fragments[0]).refreshCurrentTerminal();
     }
 
     public void showTab(boolean b) {

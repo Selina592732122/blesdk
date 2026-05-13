@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import com.clj.fastble.BleManager;
 import com.clj.fastble.callback.BleScanCallback;
 import com.clj.fastble.data.BleDevice;
+import com.shenghao.blesdk.entity.BleSdkDevice;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -41,7 +42,7 @@ public class ScanManager {
 
         try {
             BleManager.getInstance().cancelScan();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -79,23 +80,28 @@ public class ScanManager {
                     return;
                 }
                 scannedMacSet.add(mac);
+                BleSdkDevice device = new BleSdkDevice(bleDevice);
                 if (currentCallback != null) {
-                    currentCallback.onLeScan(bleDevice);
-                    currentCallback.onScanning(bleDevice);
+                    currentCallback.onLeScan(device);
+                    currentCallback.onScanning(device);
                 }
                 for (com.shenghao.blesdk.callback.BleScanCallback pending : pendingCallbacks) {
-                    pending.onLeScan(bleDevice);
-                    pending.onScanning(bleDevice);
+                    pending.onLeScan(device);
+                    pending.onScanning(device);
                 }
             }
 
             @Override
             public void onScanFinished(List<BleDevice> scanResultList) {
+                List<BleSdkDevice> resultList = new ArrayList<>();
+                for (BleDevice device : scanResultList) {
+                    resultList.add(new BleSdkDevice(device));
+                }
                 if (currentCallback != null) {
-                    currentCallback.onScanFinished(scanResultList);
+                    currentCallback.onScanFinished(resultList);
                 }
                 for (com.shenghao.blesdk.callback.BleScanCallback pending : pendingCallbacks) {
-                    pending.onScanFinished(scanResultList);
+                    pending.onScanFinished(resultList);
                 }
 
                 isScanning = false;
@@ -158,18 +164,19 @@ public class ScanManager {
                     return;
                 }
                 scannedMacSet.add(mac);
+                BleSdkDevice device = new BleSdkDevice(bleDevice);
                 if (currentCallback != null) {
-                    currentCallback.onScanning(bleDevice);
+                    currentCallback.onScanning(device);
                 }
             }
 
             @Override
             public void onScanFinished(List<BleDevice> scanResultList) {
-                List<BleDevice> filteredList = new ArrayList<>();
+                List<BleSdkDevice> filteredList = new ArrayList<>();
                 for (BleDevice device : scanResultList) {
                     String name = device.getName();
                     if (!TextUtils.isEmpty(name) && name.contains(nameFilter)) {
-                        filteredList.add(device);
+                        filteredList.add(new BleSdkDevice(device));
                     }
                 }
 

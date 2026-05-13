@@ -111,15 +111,15 @@ public class PkeCommandApi {
      * @param command    指令字节数组
      * @param callback   写入回调
      */
-    public static void sendPKECommand(BleDevice device, byte[] command, BleWriteCallback callback) {
-        if (device == null || !BleManager.getInstance().isConnected(device)) {
+    public static void sendPKECommand(com.shenghao.blesdk.entity.BleSdkDevice device, byte[] command, BleWriteCallback callback) {
+        if (device == null || !BleManager.getInstance().isConnected(device.getOriginalDevice())) {
             LogUtils.e(TAG, "设备未连接");
             return;
         }
         LogUtils.e(TAG, "发送PKE指令: " + com.shenghao.blesdk.utils.ByteUtils.bytes2HexStr(command));
         
         BleManager.getInstance().write(
-                device,
+                device.getOriginalDevice(),
                 BleConstant.SERVICE_UUID_SH,
                 BleConstant.NOTIFY_UUID_SH,
                 command,

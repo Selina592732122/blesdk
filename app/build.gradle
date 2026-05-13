@@ -61,6 +61,7 @@ android {
 
 dependencies {
 
+    implementation 'androidx.multidex:multidex:2.0.1'
     implementation libs.appcompat
     implementation libs.material
 //    implementation files('libs\\AMap3DMap_10.0.600_AMapLocation_6.4.3_20240314.jar')
@@ -91,8 +92,8 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
 
     implementation 'org.greenrobot:eventbus:3.1.1'
-//    implementation project(':bleSdk')
-    implementation 'com.github.Selina592732122:blesdk:v1.1.1'
+    implementation project(':bleSdk')
+//    implementation 'com.github.Selina592732122:blesdk:v1.1.2'
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 

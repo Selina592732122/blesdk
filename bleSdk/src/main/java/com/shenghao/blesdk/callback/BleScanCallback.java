@@ -1,16 +1,20 @@
 package com.shenghao.blesdk.callback;
 
-import com.clj.fastble.data.BleDevice;
+import com.shenghao.blesdk.entity.BleSdkDevice;
 
 import java.util.List;
 
-public interface BleScanCallback {
+public abstract class BleScanCallback {
 
-    void onScanStarted(boolean success);
+    public void onScanStarted(boolean success) {
+    }
 
-    void onLeScan(BleDevice bleDevice);
+    public void onLeScan(BleSdkDevice device) {
+    }
 
-    void onScanning(BleDevice device);
+    public void onScanning(BleSdkDevice device) {
+    }
 
-    void onScanFinished(List<BleDevice> devices);
+    public void onScanFinished(List<BleSdkDevice> devices) {
+    }
 }

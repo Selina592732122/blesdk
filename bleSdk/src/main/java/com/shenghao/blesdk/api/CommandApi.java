@@ -62,9 +62,9 @@ public class CommandApi {
         );
     }
 
-    public static void setNotifyListener(BleDevice bleDevice, com.shenghao.blesdk.callback.BleNotifyCallback callback) {
+    public static void setNotifyListener(com.shenghao.blesdk.entity.BleSdkDevice bleDevice, com.shenghao.blesdk.callback.BleNotifyCallback callback) {
         BleManager.getInstance().notify(
-                bleDevice,
+                bleDevice.getOriginalDevice(),
                 BleConstant.SERVICE_UUID_SH,
                 BleConstant.NOTIFY_UUID_SH,
                 new BleNotifyCallback() {

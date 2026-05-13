@@ -17,6 +17,8 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.bluetooth.BluetoothDevice;
+
 import com.clj.fastble.BleManager;
 import com.clj.fastble.data.BleDevice;
 import com.clj.fastble.exception.BleException;
@@ -27,7 +29,9 @@ import com.shenghao.blesdk.callback.BleConnectCallback;
 import com.shenghao.blesdk.callback.BleNotifyCallback;
 import com.shenghao.blesdk.callback.BleScanCallback;
 import com.shenghao.blesdk.callback.BleStateListener;
+import com.shenghao.blesdk.entity.BleSdkDevice;
 import com.shenghao.blesdk.enums.BlueRssiPke;
+import com.shenghao.blesdk.exception.BleSdkException;
 import com.shenghao.blesdk.listener.BluetoothStateChangeListener;
 import com.shenghao.blesdk.manager.BleConnectionManager;
 import com.shenghao.blesdk.manager.OneKeyParkingManager;
@@ -68,8 +72,8 @@ public class BleSdkDemoActivity extends BaseActivity {
     private ProgressBar progressBar;
 
     private DeviceAdapter deviceAdapter;
-    private List<BleDevice> deviceList = new ArrayList<>();
-    private BleDevice selectedDevice;
+    private List<BleSdkDevice> deviceList = new ArrayList<>();
+    private BleSdkDevice selectedDevice;
     private BluetoothReceiver bluetoothReceiver;
     private OneKeyParkingManager parkingManager;
     private PairingManager pairingManager;
@@ -127,9 +131,9 @@ public class BleSdkDemoActivity extends BaseActivity {
         });
     }
 
-    private void updateBondState(BleDevice device) {
+    private void updateBondState(BleSdkDevice device) {
         if (pairingManager != null && device != null) {
-            pairingManager.setBleDevice(device);
+            pairingManager.setBleDevice(device.getOriginalDevice());
             isBonded = pairingManager.isBonded();
             btnPair.setText(isBonded ? "已配对" : "去配对");
             btnPair.setEnabled(!isBonded && selectedDevice != null);
@@ -258,6 +262,7 @@ public class BleSdkDemoActivity extends BaseActivity {
             public void onBluetoothOn() {
                 tvStatus.setText("蓝牙已开启");
                 btnScan.setEnabled(true);
+                btnConnect.setEnabled(true);
             }
 
             @Override
@@ -282,11 +287,11 @@ public class BleSdkDemoActivity extends BaseActivity {
                 }
 
                 @Override
-                public void onConnected(String mac, BleDevice device) {
+                public void onConnected(String mac, BleSdkDevice device) {
                     tvStatus.setText("已连接: " + device.getName() + " (" + mac + ")");
                     tvConnectedDevice.setText("当前已连接: " + (TextUtils.isEmpty(device.getName()) ? "未知设备" : device.getName()) + " (" + mac + ")");
-                    parkingManager.setBleDevice(device);
-                    pairingManager.setBleDevice(device);
+                    parkingManager.setBleDevice(device.getOriginalDevice());
+                    pairingManager.setBleDevice(device.getOriginalDevice());
                     enableParkingButtons(true);
                     enablePkeButtons(true);
                     updateBondState(device);
@@ -317,17 +322,19 @@ public class BleSdkDemoActivity extends BaseActivity {
     }
 
     private void checkConnectedDevice() {
-        List<BleDevice> connectedDevices = BleManager.getInstance().getAllConnectedDevice();
-        if (connectedDevices != null && !connectedDevices.isEmpty()) {
-            BleDevice device = connectedDevices.get(0);
-            tvConnectedDevice.setText("当前已连接: " + (TextUtils.isEmpty(device.getName()) ? "未知设备" : device.getName()) + " (" + device.getMac() + ")");
-            selectedDevice = device;
-            parkingManager.setBleDevice(device);
-            pairingManager.setBleDevice(device);
-            enableParkingButtons(true);
-            updateBondState(device);
-            BleConfigManager.getInstance().setBleMac(device.getMac());
-            return;
+        String savedMac = BleConfigManager.getInstance().getBleMac();
+        BleConnectionManager connectionManager = BleSdk.getInstance().getBleConnectionManager();
+        if (!TextUtils.isEmpty(savedMac) && connectionManager.isConnected(savedMac)) {
+            BleSdkDevice device = connectionManager.getConnectedDevice(savedMac);
+            if (device != null) {
+                tvConnectedDevice.setText("当前已连接: " + (TextUtils.isEmpty(device.getName()) ? "未知设备" : device.getName()) + " (" + savedMac + ")");
+                selectedDevice = device;
+                parkingManager.setBleDevice(device.getOriginalDevice());
+                pairingManager.setBleDevice(device.getOriginalDevice());
+                enableParkingButtons(true);
+                updateBondState(device);
+                return;
+            }
         }
         tvConnectedDevice.setText("当前已连接: 无");
     }
@@ -352,9 +359,9 @@ public class BleSdkDemoActivity extends BaseActivity {
         tvStatus.setText("正在打开通知...");
         btnNotify.setEnabled(false);
 
-        BleDevice device = selectedDevice;
+        BleSdkDevice device = selectedDevice;
         if (device == null) {
-            List<BleDevice> connectedDevices = BleManager.getInstance().getAllConnectedDevice();
+            List<BleSdkDevice> connectedDevices = BleSdk.getInstance().getBleConnectionManager().getSdkConnectedDevices();
             if (connectedDevices != null && !connectedDevices.isEmpty()) {
                 device = connectedDevices.get(0);
                 selectedDevice = device;
@@ -404,7 +411,7 @@ public class BleSdkDemoActivity extends BaseActivity {
             }
 
             @Override
-            public void onLeScan(BleDevice device) {
+            public void onLeScan(BleSdkDevice device) {
                 if (!deviceList.contains(device)) {
                     deviceList.add(device);
                     deviceAdapter.notifyItemInserted(deviceList.size() - 1);
@@ -412,31 +419,27 @@ public class BleSdkDemoActivity extends BaseActivity {
             }
 
             @Override
-            public void onScanning(BleDevice device) {
-//                if (!deviceList.contains(device)) {
-//                    deviceList.add(device);
-//                    deviceAdapter.notifyItemInserted(deviceList.size() - 1);
-//                }
+            public void onScanning(BleSdkDevice device) {
             }
 
             @Override
-            public void onScanFinished(List<BleDevice> devices) {
+            public void onScanFinished(List<BleSdkDevice> devices) {
                 tvStatus.setText("扫描完成，共发现 " + devices.size() + " 个设备");
             }
         });
     }
 
-    private void connectToDevice(BleDevice device) {
+    private void connectToDevice(BleSdkDevice device) {
         BleConnectionManager connectionManager = BleSdk.getInstance().getBleConnectionManager();
         connectionManager.connect(device.getMac(), new BleConnectCallback() {
             @Override
-            public void onSuccess(BleDevice bleDevice) {
+            public void onSuccess(BleSdkDevice bleDevice) {
                 selectedDevice = bleDevice;
                 BleConfigManager.getInstance().setBleMac(bleDevice.getMac());
             }
 
             @Override
-            public void onFailed(BleException exception) {
+            public void onFailed(BleSdkException exception) {
 
             }
 
@@ -591,15 +594,15 @@ public class BleSdkDemoActivity extends BaseActivity {
 
     public static class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder> {
 
-        private List<BleDevice> devices;
+        private List<BleSdkDevice> devices;
         private OnItemClickListener listener;
 
-        public DeviceAdapter(List<BleDevice> devices) {
+        public DeviceAdapter(List<BleSdkDevice> devices) {
             this.devices = devices;
         }
 
         public interface OnItemClickListener {
-            void onItemClick(BleDevice device);
+            void onItemClick(BleSdkDevice device);
         }
 
         public void setOnItemClickListener(OnItemClickListener listener) {
@@ -615,7 +618,7 @@ public class BleSdkDemoActivity extends BaseActivity {
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            BleDevice device = devices.get(position);
+            BleSdkDevice device = devices.get(position);
             holder.tvName.setText(TextUtils.isEmpty(device.getName()) ? "未知设备" : device.getName());
             holder.tvMac.setText(device.getMac() + " | RSSI: " + device.getRssi());
 

@@ -1,13 +1,13 @@
 package com.shenghao.blesdk.callback;
 
-import com.clj.fastble.data.BleDevice;
-import com.clj.fastble.exception.BleException;
+import com.shenghao.blesdk.entity.BleSdkDevice;
+import com.shenghao.blesdk.exception.BleSdkException;
 
 public interface BleConnectCallback {
 
-    void onSuccess(BleDevice device);
+    void onSuccess(BleSdkDevice device);
 
-    void onFailed(BleException exception);
+    void onFailed(BleSdkException exception);
 
     void onDisconnected();
 }

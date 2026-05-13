@@ -16,7 +16,6 @@ import com.shenghao.blesdkdemo.ui.EditGeoFencePolygonActivity;
 import com.shenghao.blesdkdemo.ui.GeoFenceListActivity;
 import com.shenghao.blesdkdemo.ui.JFWebActivity;
 import com.shenghao.blesdkdemo.ui.LoginActivity;
-import com.shenghao.blesdkdemo.ui.MainActivity;
 import com.shenghao.blesdkdemo.ui.NoticeCenterActivity;
 import com.shenghao.blesdkdemo.ui.NoticeDetailActivity;
 import com.shenghao.blesdkdemo.ui.PayServiceActivity;
@@ -37,8 +36,8 @@ public class Redirect {
     }
 
     public static void startMainActivity(Context context) {
-        Intent intent = new Intent(context, MainActivity.class);
-        context.startActivity(intent);
+//        Intent intent = new Intent(context, MainActivity.class);
+//        context.startActivity(intent);
     }
 
     public static void startSettingActivity(Context context) {

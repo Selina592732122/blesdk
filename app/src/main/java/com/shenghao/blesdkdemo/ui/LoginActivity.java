@@ -372,9 +372,9 @@ public class LoginActivity extends BaseActivity implements WeChatLoginHelper.Log
                 if (terminalListResp != null && terminalListResp.isSuccess()) {
                     if (terminalListResp.getData().size() > 0) {    //已绑定设备
                         TerminalUtils.setCurrentTerminal(terminalListResp.getData());
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
+//                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        startActivity(intent);
 //                        Redirect.startMainActivity(LoginActivity.this);
 //                        finish();
                     } else {    //设备列表为空，跳转至绑定设备界面

@@ -22,6 +22,7 @@ import com.shenghao.blesdk.beacon.Beacon;
 import com.shenghao.blesdk.beacon.BeaconItem;
 import com.shenghao.blesdk.callback.BleConnectCallback;
 import com.shenghao.blesdk.callback.BleStateListener;
+import com.shenghao.blesdk.entity.BleSdkDevice;
 import com.shenghao.blesdk.exception.BleSdkException;
 import com.shenghao.blesdk.utils.BleConfigManager;
 import com.shenghao.blesdk.utils.LogUtils;
@@ -39,6 +40,7 @@ public class BleConnectionManager {
     private Context context;
     private Handler handler;
     private Runnable autoConnectRunnable;
+    private Runnable connectTimeoutRunnable;
     private boolean isAutoConnectEnabled = true;
     private boolean isConnecting = false;
     private boolean isLoopRunning = false;
@@ -52,6 +54,7 @@ public class BleConnectionManager {
         this.bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         this.isAutoConnectEnabled = BleConfigManager.getInstance(context).isAutoConnectEnabled();
         initAutoConnectRunnable();
+        initConnectTimeoutRunnable();
         if (isAutoConnectEnabled) {
             startAutoConnectLoop();
         }
@@ -88,6 +91,21 @@ public class BleConnectionManager {
                 } catch (Exception e) {
                     Log.e(TAG, "Auto connect runnable error", e);
                     handler.postDelayed(this, RECONNECT_INTERVAL);
+                }
+            }
+        };
+    }
+
+    private void initConnectTimeoutRunnable() {
+        connectTimeoutRunnable = new Runnable() {
+            @Override
+            public void run() {
+                if (isConnecting) {
+                    Log.e(TAG, "Connect timeout, resetting isConnecting flag");
+                    isConnecting = false;
+                    if (stateListener != null) {
+                        stateListener.onConnectFailed(lastConnectedMac, "Connect timeout");
+                    }
                 }
             }
         };
@@ -156,8 +174,13 @@ public class BleConnectionManager {
         }
 
         if (BleManager.getInstance().isConnected(mac)) {
+            BleDevice device = findConnectedDevice(mac);
+            BleSdkDevice sdkDevice = device != null ? new BleSdkDevice(device) : null;
             if (callback != null) {
-                callback.onSuccess(findConnectedDevice(mac));
+                callback.onSuccess(sdkDevice);
+            }
+            if (stateListener != null) {
+                stateListener.onConnected(mac, sdkDevice);
             }
             return;
         }
@@ -176,6 +199,9 @@ public class BleConnectionManager {
             stateListener.onConnecting(mac);
         }
 
+        handler.removeCallbacks(connectTimeoutRunnable);
+        handler.postDelayed(connectTimeoutRunnable, 15000);
+
         BleManager.getInstance().destroy();
         BleManager.getInstance().connect(mac, new BleGattCallback() {
             @Override
@@ -185,11 +211,12 @@ public class BleConnectionManager {
 
             @Override
             public void onConnectFail(BleDevice bleDevice, com.clj.fastble.exception.BleException exception) {
+                handler.removeCallbacks(connectTimeoutRunnable);
                 isConnecting = false;
                 String errorMsg = exception != null ? exception.getDescription() : "Unknown error";
 
                 if (callback != null) {
-                    callback.onFailed(exception);
+                    callback.onFailed(new BleSdkException(BleSdkException.CODE_CONNECT_ERROR, errorMsg));
                 }
                 if (stateListener != null) {
                     stateListener.onConnectFailed(mac, errorMsg);
@@ -199,14 +226,16 @@ public class BleConnectionManager {
 
             @Override
             public void onConnectSuccess(BleDevice bleDevice, android.bluetooth.BluetoothGatt gatt, int status) {
+                handler.removeCallbacks(connectTimeoutRunnable);
                 isConnecting = false;
                 BleConfigManager.getInstance().setBleMac(bleDevice.getMac());
+                BleSdkDevice sdkDevice = new BleSdkDevice(bleDevice);
 
                 if (callback != null) {
-                    callback.onSuccess(bleDevice);
+                    callback.onSuccess(sdkDevice);
                 }
                 if (stateListener != null) {
-                    stateListener.onConnected(bleDevice.getMac(), bleDevice);
+                    stateListener.onConnected(bleDevice.getMac(), sdkDevice);
                 }
                 Log.d(TAG, "Connect success: " + bleDevice.getName() + " (" + bleDevice.getMac() + ")");
             }
@@ -214,6 +243,7 @@ public class BleConnectionManager {
             @Override
             public void onDisConnected(boolean isActiveDisConnected, BleDevice bleDevice,
                     android.bluetooth.BluetoothGatt gatt, int status) {
+                handler.removeCallbacks(connectTimeoutRunnable);
                 isConnecting = false;
 
                 if (callback != null) {
@@ -256,11 +286,12 @@ public class BleConnectionManager {
         return null;
     }
 
-    public BleDevice getConnectedDevice(String mac) {
+    public BleSdkDevice getConnectedDevice(String mac) {
         if (TextUtils.isEmpty(mac)) {
             return null;
         }
-        return findConnectedDevice(mac);
+        BleDevice device = findConnectedDevice(mac);
+        return device != null ? new BleSdkDevice(device) : null;
     }
 
     public void setAutoConnectEnabled(boolean enabled) {
@@ -302,7 +333,7 @@ public class BleConnectionManager {
             List<BleDevice> connectedDevices = BleManager.getInstance().getAllConnectedDevice();
             if (connectedDevices != null && !connectedDevices.isEmpty()) {
                 BleDevice device = connectedDevices.get(0);
-                listener.onConnected(device.getMac(), device);
+                listener.onConnected(device.getMac(), new BleSdkDevice(device));
             }
         }
     }
@@ -365,6 +396,17 @@ public class BleConnectionManager {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        return list;
+    }
+
+    public List<BleSdkDevice> getSdkConnectedDevices() {
+        List<BleSdkDevice> list = new ArrayList<>();
+        List<BleDevice> connectedDevices = BleManager.getInstance().getAllConnectedDevice();
+        if (connectedDevices != null && !connectedDevices.isEmpty()) {
+            for (BleDevice device : connectedDevices) {
+                list.add(new BleSdkDevice(device));
+            }
         }
         return list;
     }

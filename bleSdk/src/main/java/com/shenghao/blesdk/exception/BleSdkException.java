@@ -6,6 +6,7 @@ public class BleSdkException extends BleException {
 
     public static final int CODE_NULL = 1000;
     public static final int CODE_CONNECTING = 1001;
+    public static final int CODE_CONNECT_ERROR = 1002;
 
     private int code;
     private String description;

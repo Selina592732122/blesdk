@@ -1,8 +1,9 @@
 package com.shenghao.blesdkdemo;
 
 import android.app.Activity;
-import android.app.Application;
 import android.os.Bundle;
+
+import androidx.multidex.MultiDexApplication;
 
 import com.amap.api.maps.MapsInitializer;
 import com.shenghao.blesdk.BleSdk;
@@ -15,7 +16,7 @@ import org.greenrobot.eventbus.EventBus;
 
 
 //
-public class ShengHaoApp extends Application {
+public class ShengHaoApp extends MultiDexApplication {
     private static ShengHaoApp app;
     private int countActivity = 0;
     private boolean isBackground = false;   //是否进入后台

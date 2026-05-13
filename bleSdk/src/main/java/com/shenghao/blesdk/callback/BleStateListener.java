@@ -1,12 +1,12 @@
 package com.shenghao.blesdk.callback;
 
-import com.clj.fastble.data.BleDevice;
+import com.shenghao.blesdk.entity.BleSdkDevice;
 
 public interface BleStateListener {
 
     void onConnecting(String mac);
 
-    void onConnected(String mac, BleDevice device);
+    void onConnected(String mac, BleSdkDevice device);
 
     void onDisconnected(String mac);
 

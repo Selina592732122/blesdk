@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.shenghao.widget.MapFriendlyNestedScrollView
+<com.shenghao.blesdkdemo.widget.MapFriendlyNestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -219,7 +219,7 @@
 
                     </LinearLayout>
 
-                    <com.shenghao.widget.SlipButton
+                    <com.shenghao.blesdkdemo.widget.SlipButton
                         android:id="@+id/powerBtn"
                         android:layout_gravity="center"
                         android:nestedScrollingEnabled="false"
@@ -337,7 +337,7 @@
                 <!--                        </LinearLayout>-->
                 <!--                    </LinearLayout>-->
 
-                <com.shenghao.widget.CircleMenuPager
+                <com.shenghao.blesdkdemo.widget.CircleMenuPager
                     android:id="@+id/circleMenuPager"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -701,4 +701,4 @@
 
 
     </LinearLayout>
-</com.shenghao.widget.MapFriendlyNestedScrollView>
+</com.shenghao.blesdkdemo.widget.MapFriendlyNestedScrollView>

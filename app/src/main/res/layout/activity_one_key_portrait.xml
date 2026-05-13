@@ -199,7 +199,7 @@
 
                 </RelativeLayout>
 
-                <com.shenghao.widget.LongPressImageView
+                <com.shenghao.blesdkdemo.widget.LongPressImageView
                     android:id="@+id/ivUp"
                     android:layout_width="wrap_content"
                     android:src="@drawable/ic_up"
@@ -208,7 +208,7 @@
                     android:layout_alignTop="@+id/ivTrack"
                     android:layout_height="wrap_content"/>
 
-                <com.shenghao.widget.LongPressImageView
+                <com.shenghao.blesdkdemo.widget.LongPressImageView
                     android:id="@+id/ivDown"
                     android:layout_width="wrap_content"
                     android:src="@drawable/ic_down"

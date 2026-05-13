@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.shenghao.widget.SwipeMenuLayout
+<com.shenghao.blesdkdemo.widget.SwipeMenuLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -122,6 +122,6 @@
     </LinearLayout>
     
 
-</com.shenghao.widget.SwipeMenuLayout>
+</com.shenghao.blesdkdemo.widget.SwipeMenuLayout>
 
 

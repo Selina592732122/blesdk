@@ -52,6 +52,9 @@ public class BleConnectionManager {
         this.bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         this.isAutoConnectEnabled = BleConfigManager.getInstance(context).isAutoConnectEnabled();
         initAutoConnectRunnable();
+        if (isAutoConnectEnabled) {
+            startAutoConnectLoop();
+        }
     }
 
     private void initAutoConnectRunnable() {
@@ -295,6 +298,13 @@ public class BleConnectionManager {
 
     public void setStateListener(BleStateListener listener) {
         this.stateListener = listener;
+        if (listener != null) {
+            List<BleDevice> connectedDevices = BleManager.getInstance().getAllConnectedDevice();
+            if (connectedDevices != null && !connectedDevices.isEmpty()) {
+                BleDevice device = connectedDevices.get(0);
+                listener.onConnected(device.getMac(), device);
+            }
+        }
     }
 
     public BleStateListener getStateListener() {

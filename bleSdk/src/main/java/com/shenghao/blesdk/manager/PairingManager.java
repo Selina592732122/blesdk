@@ -63,11 +63,11 @@ public class PairingManager {
                             pairingCallback.onPairingSuccess();
                         }
 
-//                        handler.postDelayed(() -> {
+                        handler.postDelayed(() -> {
 //                            sendDisconnectCommand();
-//                            BleConnectionManager connectionManager = com.shenghao.blesdk.BleSdk.getInstance().getBleConnectionManager();
-//                            connectionManager.setAutoConnectEnabled(true);
-//                        }, 3000);
+                            BleConnectionManager connectionManager = com.shenghao.blesdk.BleSdk.getInstance().getBleConnectionManager();
+                            connectionManager.setAutoConnectEnabled(true);
+                        }, 3000);
                         break;
                     case BluetoothDevice.BOND_BONDING:
                         if (pairingCallback != null) {

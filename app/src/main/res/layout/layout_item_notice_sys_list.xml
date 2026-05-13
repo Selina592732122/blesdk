@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.shenghao.widget.SwipeMenuLayout
+    <com.shenghao.blesdkdemo.widget.SwipeMenuLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
@@ -173,7 +173,7 @@
             android:layout_width="16dp"
             android:layout_height="wrap_content"/>
 
-    </com.shenghao.widget.SwipeMenuLayout>
+    </com.shenghao.blesdkdemo.widget.SwipeMenuLayout>
 
 </LinearLayout>
 

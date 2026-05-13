@@ -37,7 +37,7 @@
     <methods>;
     public <init>();
 }
--keep class com.shenghao.bean.** { *; }
+-keep class com.shenghao.blesdkdemo.bean.** { *; }
 -keep class com.shenghao.entity.** { *; }
 
 # ======================== Gson 相关 ========================

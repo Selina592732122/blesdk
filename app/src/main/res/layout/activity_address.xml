@@ -124,7 +124,7 @@
             android:orientation="vertical"
             android:layout_height="match_parent">
 
-            <com.shenghao.widget.EmptyRecyclerView
+            <com.shenghao.blesdkdemo.widget.EmptyRecyclerView
                 android:id="@+id/recyclerView"
                 android:visibility="visible"
                 android:layout_width="match_parent"

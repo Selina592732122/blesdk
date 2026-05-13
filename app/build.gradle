@@ -3,15 +3,15 @@ plugins {
 }
 
 android {
-    namespace 'com.shenghao'
+    namespace 'com.shenghao.blesdkdemo'
     compileSdk 35
 
     defaultConfig {
-        applicationId "com.shenghao"
+        applicationId "com.shenghao.blesdkdemo"
         minSdk 24
         targetSdk 35
-        versionCode 185
-        versionName "1.8.5"
+        versionCode 1
+        versionName "1.0"
         manifestPlaceholders = [
                 JPUSH_PKGNAME : applicationId,
                 //JPush 上注册的包名对应的 Appkey.
@@ -92,7 +92,7 @@ dependencies {
 
     implementation 'org.greenrobot:eventbus:3.1.1'
     implementation project(':bleSdk')
-//    implementation 'com.github.Selina592732122:blesdk:v1.0.0'
+//    implementation 'com.github.Selina592732122:blesdk:v1.0.9'
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 

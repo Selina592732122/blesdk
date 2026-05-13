@@ -93,7 +93,7 @@
                     android:src="@drawable/ic_air_left"
                     android:layout_height="wrap_content"/>
 
-                <com.shenghao.widget.SixGearSeekBar
+                <com.shenghao.blesdkdemo.widget.SixGearSeekBar
                     android:id="@+id/gearSeekBar"
                     android:layout_width="0dp"
                     android:layout_weight="1"

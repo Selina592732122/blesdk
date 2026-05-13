@@ -258,14 +258,14 @@
             android:layout_marginRight="16dp"
             android:orientation="vertical">
 
-            <com.shenghao.widget.HorizontalPriorityRecyclerView
+            <com.shenghao.blesdkdemo.widget.HorizontalPriorityRecyclerView
                 android:id="@+id/terminalRv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:overScrollMode="never"
                 android:scrollbars="none" />
 
-            <com.shenghao.widget.CustomDotIndicator
+            <com.shenghao.blesdkdemo.widget.CustomDotIndicator
                 android:id="@+id/indicator"
                 android:padding="8dp"
                 android:layout_gravity="center"

@@ -124,7 +124,7 @@
                     android:layout_width="match_parent"
                     android:orientation="vertical"
                     android:layout_height="wrap_content">
-                    <com.shenghao.widget.EmptyRecyclerView
+                    <com.shenghao.blesdkdemo.widget.EmptyRecyclerView
                         android:id="@+id/recyclerViewFind"
                         android:background="@drawable/bg_white_radius_shape"
                         android:layout_width="match_parent"
@@ -177,7 +177,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_height="wrap_content">
-                <com.shenghao.widget.EmptyRecyclerView
+                <com.shenghao.blesdkdemo.widget.EmptyRecyclerView
                     android:id="@+id/recyclerViewBind"
                     android:background="@drawable/bg_white_radius_shape"
                     android:layout_width="match_parent"

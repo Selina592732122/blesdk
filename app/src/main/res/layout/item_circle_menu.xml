@@ -10,7 +10,7 @@
 
 
     <!-- 图标 -->
-    <com.shenghao.widget.ImageForegroundImageView
+    <com.shenghao.blesdkdemo.widget.ImageForegroundImageView
         android:id="@+id/iv_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

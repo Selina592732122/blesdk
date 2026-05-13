@@ -185,7 +185,7 @@
                 android:orientation="horizontal">
 
 
-                <com.shenghao.widget.PasswordEditText
+                <com.shenghao.blesdkdemo.widget.PasswordEditText
                     android:id="@+id/etPwd"
                     android:layout_width="match_parent"
                     app:hint="@string/enter_password"

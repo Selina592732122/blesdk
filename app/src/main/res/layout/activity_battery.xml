@@ -60,7 +60,7 @@
                 android:layout_width="wrap_content"
                 android:orientation="vertical"
                 android:layout_height="wrap_content">
-                <com.shenghao.widget.VerticalProgressBar
+                <com.shenghao.blesdkdemo.widget.VerticalProgressBar
                     android:id="@+id/progressBar"
                     android:layout_width="40dp"
                     android:layout_height="142dp"/>

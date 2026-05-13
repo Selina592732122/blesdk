@@ -94,7 +94,7 @@
             android:textSize="12sp"
             />
 
-       <com.shenghao.widget.VerificationCodeView
+       <com.shenghao.blesdkdemo.widget.VerificationCodeView
            android:id="@+id/verifyView"
            android:layout_width="match_parent"
            android:layout_marginTop="50dp"

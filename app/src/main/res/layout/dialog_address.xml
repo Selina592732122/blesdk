@@ -56,7 +56,7 @@
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content">
-            <com.shenghao.widget.WheelView
+            <com.shenghao.blesdkdemo.widget.WheelView
                 android:id="@+id/wheelviewLeft"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -69,7 +69,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content">
 
-            <com.shenghao.widget.WheelView
+            <com.shenghao.blesdkdemo.widget.WheelView
                 android:id="@+id/wheelviewRight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>

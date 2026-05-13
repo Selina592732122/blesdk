@@ -1,10 +1,10 @@
 package com.shenghao.blesdk.callback;
 
-import com.clj.fastble.exception.BleException;
+import com.shenghao.blesdk.exception.BleSdkException;
 
 public interface BleWriteCallback {
 
     void onWriteSuccess(int current, int total, byte[] justWrite);
 
-    void onWriteFailed(BleException exception);
+    void onWriteFailed(BleSdkException exception);
 }

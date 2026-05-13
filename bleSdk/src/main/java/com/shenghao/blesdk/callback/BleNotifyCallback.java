@@ -1,12 +1,12 @@
 package com.shenghao.blesdk.callback;
 
-import com.clj.fastble.exception.BleException;
+import com.shenghao.blesdk.exception.BleSdkException;
 
 public interface BleNotifyCallback {
 
     void onNotifySuccess();
 
-    void onNotifyFailed(BleException exception);
+    void onNotifyFailed(BleSdkException exception);
 
     void onCharacteristicChanged(byte[] data);
 }

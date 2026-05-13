@@ -19,9 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.bluetooth.BluetoothDevice;
 
-import com.clj.fastble.BleManager;
-import com.clj.fastble.data.BleDevice;
-import com.clj.fastble.exception.BleException;
 import com.shenghao.blesdkdemo.R;
 import com.shenghao.blesdk.BleSdk;
 import com.shenghao.blesdk.api.CommandApi;
@@ -379,7 +376,7 @@ public class BleSdkDemoActivity extends BaseActivity {
             }
 
             @Override
-            public void onNotifyFailed(BleException exception) {
+            public void onNotifyFailed(com.shenghao.blesdk.exception.BleSdkException exception) {
                 runOnUiThread(() -> {
                     tvStatus.setText("通知打开失败: " + exception.getDescription());
                     btnNotify.setText("打开通知");
@@ -514,14 +511,14 @@ public class BleSdkDemoActivity extends BaseActivity {
                 com.shenghao.blesdk.api.PkeCommandApi.generatePKECommand(enable, false, false, false,
                         BleConfigManager.getInstance().getBleUnlockRssi(),
                         BleConfigManager.getInstance().getBleLockRssi(), 1, "0000"),
-                new com.clj.fastble.callback.BleWriteCallback() {
+                new com.shenghao.blesdk.callback.BleWriteCallback() {
                     @Override
                     public void onWriteSuccess(int current, int total, byte[] justWrite) {
                         tvStatus.setText("PKE" + (enable ? "开启" : "关闭") + "成功");
                     }
 
                     @Override
-                    public void onWriteFailure(com.clj.fastble.exception.BleException exception) {
+                    public void onWriteFailed(com.shenghao.blesdk.exception.BleSdkException exception) {
                         tvStatus.setText("PKE" + (enable ? "开启" : "关闭") + "失败");
                         switchPKE.setChecked(!enable);
                     }
@@ -536,7 +533,7 @@ public class BleSdkDemoActivity extends BaseActivity {
 
         com.shenghao.blesdk.api.PkeCommandApi.sendPKECommand(selectedDevice,
                 com.shenghao.blesdk.api.PkeCommandApi.generatePKECommand(unlockDb, lockDb),
-                new com.clj.fastble.callback.BleWriteCallback() {
+                new com.shenghao.blesdk.callback.BleWriteCallback() {
                     @Override
                     public void onWriteSuccess(int current, int total, byte[] justWrite) {
                         tvStatus.setText("PKE档位设置成功");
@@ -545,7 +542,7 @@ public class BleSdkDemoActivity extends BaseActivity {
                     }
 
                     @Override
-                    public void onWriteFailure(com.clj.fastble.exception.BleException exception) {
+                    public void onWriteFailed(com.shenghao.blesdk.exception.BleSdkException exception) {
                         tvStatus.setText("PKE档位设置失败");
                     }
                 });
@@ -555,14 +552,14 @@ public class BleSdkDemoActivity extends BaseActivity {
         tvStatus.setText("读取PKE配置...");
         com.shenghao.blesdk.api.PkeCommandApi.sendPKECommand(selectedDevice,
                 com.shenghao.blesdk.api.PkeCommandApi.generateReadPKECommand(),
-                new com.clj.fastble.callback.BleWriteCallback() {
+                new com.shenghao.blesdk.callback.BleWriteCallback() {
                     @Override
                     public void onWriteSuccess(int current, int total, byte[] justWrite) {
                         tvStatus.setText("PKE配置读取命令已发送");
                     }
 
                     @Override
-                    public void onWriteFailure(com.clj.fastble.exception.BleException exception) {
+                    public void onWriteFailed(com.shenghao.blesdk.exception.BleSdkException exception) {
                         tvStatus.setText("PKE配置读取失败");
                     }
                 });

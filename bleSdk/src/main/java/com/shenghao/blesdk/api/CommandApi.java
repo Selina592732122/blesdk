@@ -31,16 +31,18 @@ public class CommandApi {
                     @Override
                     public void onWriteFailure(BleException exception) {
                         if (callback != null) {
-                            callback.onWriteFailed(exception);
+                            callback.onWriteFailed(new com.shenghao.blesdk.exception.BleSdkException(
+                                    com.shenghao.blesdk.exception.BleSdkException.CODE_WRITE_ERROR,
+                                    exception != null ? exception.getDescription() : "Write failed"));
                         }
                     }
                 }
         );
     }
 
-    public static void sendCommand(BleDevice bleDevice, byte[] data, com.shenghao.blesdk.callback.BleWriteCallback callback) {
+    public static void sendCommand(com.shenghao.blesdk.entity.BleSdkDevice bleDevice, byte[] data, com.shenghao.blesdk.callback.BleWriteCallback callback) {
         BleManager.getInstance().write(
-                bleDevice,
+                bleDevice.getOriginalDevice(),
                 BleConstant.SERVICE_UUID_SH,
                 BleConstant.WRITE_UUID_SH,
                 data,
@@ -55,7 +57,9 @@ public class CommandApi {
                     @Override
                     public void onWriteFailure(BleException exception) {
                         if (callback != null) {
-                            callback.onWriteFailed(exception);
+                            callback.onWriteFailed(new com.shenghao.blesdk.exception.BleSdkException(
+                                    com.shenghao.blesdk.exception.BleSdkException.CODE_WRITE_ERROR,
+                                    exception != null ? exception.getDescription() : "Write failed"));
                         }
                     }
                 }
@@ -78,7 +82,9 @@ public class CommandApi {
                     @Override
                     public void onNotifyFailure(BleException exception) {
                         if (callback != null) {
-                            callback.onNotifyFailed(exception);
+                            callback.onNotifyFailed(new com.shenghao.blesdk.exception.BleSdkException(
+                                    com.shenghao.blesdk.exception.BleSdkException.CODE_WRITE_ERROR,
+                                    exception != null ? exception.getDescription() : "Notify failed"));
                         }
                     }
 
@@ -109,7 +115,9 @@ public class CommandApi {
                     @Override
                     public void onNotifyFailure(BleException exception) {
                         if (callback != null) {
-                            callback.onNotifyFailed(exception);
+                            callback.onNotifyFailed(new com.shenghao.blesdk.exception.BleSdkException(
+                                    com.shenghao.blesdk.exception.BleSdkException.CODE_WRITE_ERROR,
+                                    exception != null ? exception.getDescription() : "Notify failed"));
                         }
                     }
 
@@ -171,7 +179,9 @@ public class CommandApi {
                     @Override
                     public void onWriteFailure(BleException exception) {
                         if (callback != null) {
-                            callback.onWriteFailed(exception);
+                            callback.onWriteFailed(new com.shenghao.blesdk.exception.BleSdkException(
+                                    com.shenghao.blesdk.exception.BleSdkException.CODE_WRITE_ERROR,
+                                    exception != null ? exception.getDescription() : "Write failed"));
                         }
                     }
                 }

@@ -111,7 +111,7 @@ public class PkeCommandApi {
      * @param command    指令字节数组
      * @param callback   写入回调
      */
-    public static void sendPKECommand(com.shenghao.blesdk.entity.BleSdkDevice device, byte[] command, BleWriteCallback callback) {
+    public static void sendPKECommand(com.shenghao.blesdk.entity.BleSdkDevice device, byte[] command, com.shenghao.blesdk.callback.BleWriteCallback callback) {
         if (device == null || !BleManager.getInstance().isConnected(device.getOriginalDevice())) {
             LogUtils.e(TAG, "设备未连接");
             return;
@@ -123,7 +123,23 @@ public class PkeCommandApi {
                 BleConstant.SERVICE_UUID_SH,
                 BleConstant.NOTIFY_UUID_SH,
                 command,
-                callback
+                new BleWriteCallback() {
+                    @Override
+                    public void onWriteSuccess(int current, int total, byte[] justWrite) {
+                        if (callback != null) {
+                            callback.onWriteSuccess(current, total, justWrite);
+                        }
+                    }
+
+                    @Override
+                    public void onWriteFailure(BleException exception) {
+                        if (callback != null) {
+                            callback.onWriteFailed(new com.shenghao.blesdk.exception.BleSdkException(
+                                    com.shenghao.blesdk.exception.BleSdkException.CODE_WRITE_ERROR,
+                                    exception != null ? exception.getDescription() : "Write failed"));
+                        }
+                    }
+                }
         );
     }
 

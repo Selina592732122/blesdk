@@ -92,7 +92,7 @@ dependencies {
 
     implementation 'org.greenrobot:eventbus:3.1.1'
 //    implementation project(':bleSdk')
-    implementation 'com.github.Selina592732122:blesdk:v1.1.0'
+    implementation 'com.github.Selina592732122:blesdk:v1.1.1'
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 

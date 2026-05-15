@@ -92,8 +92,8 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
 
     implementation 'org.greenrobot:eventbus:3.1.1'
-    implementation project(':bleSdk')
-//    implementation 'com.github.Selina592732122:blesdk:v1.1.6'
+//    implementation project(':bleSdk')
+    implementation 'com.github.Selina592732122:blesdk:v1.1.7'
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 

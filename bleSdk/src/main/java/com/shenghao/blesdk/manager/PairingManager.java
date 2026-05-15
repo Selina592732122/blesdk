@@ -222,7 +222,7 @@ public class PairingManager {
                     device.createBond();
                 }
             }
-        } else if (hex.startsWith("ff1212")) {
+        } else if ((hex.startsWith("ff1212")) || (hex.startsWith("ff120069"))) {
             Log.d(TAG, "收到PKE状态数据");
         }
     }

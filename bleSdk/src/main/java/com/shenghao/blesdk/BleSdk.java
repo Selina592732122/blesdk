@@ -89,4 +89,8 @@ public class BleSdk {
     public Context getContext() {
         return appContext;
     }
+
+    public void destroy() {
+        BleManager.getInstance().destroy();
+    }
 }

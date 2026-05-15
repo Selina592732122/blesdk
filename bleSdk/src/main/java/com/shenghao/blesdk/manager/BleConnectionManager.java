@@ -36,6 +36,7 @@ public class BleConnectionManager {
 
     private static final String TAG = "BleConnectionManager";
     private static final int RECONNECT_INTERVAL = 5000;
+    private static final long MAX_RECONNECT_DELAY = 60000;
 
     private Context context;
     private Handler handler;
@@ -44,6 +45,7 @@ public class BleConnectionManager {
     private boolean isAutoConnectEnabled = true;
     private boolean isConnecting = false;
     private boolean isLoopRunning = false;
+    private long reconnectDelay = RECONNECT_INTERVAL;
     private BleStateListener stateListener;
     private String lastConnectedMac;
     private BluetoothAdapter bluetoothAdapter;
@@ -87,13 +89,82 @@ public class BleConnectionManager {
                             tryConnect2();
                         }
                     }
-                    handler.postDelayed(this, RECONNECT_INTERVAL);
+                    handler.postDelayed(this, reconnectDelay);
                 } catch (Exception e) {
                     Log.e(TAG, "Auto connect runnable error", e);
-                    handler.postDelayed(this, RECONNECT_INTERVAL);
+                    handler.postDelayed(this, reconnectDelay);
                 }
             }
         };
+    }
+
+    private static final int BLUETOOTH_STATE_CONNECTED = 2;
+
+    private void forceDisconnectDevice(String mac) {
+        if (TextUtils.isEmpty(mac) || bluetoothAdapter == null) {
+            return;
+        }
+        try {
+            BluetoothDevice device = bluetoothAdapter.getRemoteDevice(mac);
+            
+            try {
+                Method disconnectMethod = BluetoothDevice.class.getDeclaredMethod("disconnect", (Class[]) null);
+                disconnectMethod.setAccessible(true);
+                disconnectMethod.invoke(device, (Object[]) null);
+                Log.d(TAG, "已调用 disconnect 方法断开设备: " + mac);
+            } catch (Exception e) {
+                Log.d(TAG, "disconnect 方法不可用");
+            }
+            
+            try {
+                Method cancelBondProcessMethod = BluetoothDevice.class.getDeclaredMethod("cancelBondProcess", (Class[]) null);
+                cancelBondProcessMethod.setAccessible(true);
+                cancelBondProcessMethod.invoke(device, (Object[]) null);
+                Log.d(TAG, "已调用 cancelBondProcess 方法");
+            } catch (Exception e) {
+                Log.d(TAG, "cancelBondProcess 方法不可用");
+            }
+            
+            Thread.sleep(500);
+        } catch (Exception e) {
+            Log.e(TAG, "强制断开设备失败: " + e.getMessage());
+        }
+    }
+
+    private boolean isDeviceConnectedToOtherApp(String mac) {
+        if (TextUtils.isEmpty(mac) || bluetoothAdapter == null) {
+            return false;
+        }
+        try {
+            BluetoothDevice device = bluetoothAdapter.getRemoteDevice(mac);
+            
+            try {
+                Method getConnectionStateMethod = BluetoothDevice.class.getMethod("getConnectionState", (Class[]) null);
+                getConnectionStateMethod.setAccessible(true);
+                int connectionState = (int) getConnectionStateMethod.invoke(device, (Object[]) null);
+                if (connectionState == BLUETOOTH_STATE_CONNECTED && !BleManager.getInstance().isConnected(mac)) {
+                    return true;
+                }
+            } catch (Exception e) {
+                Log.d(TAG, "getConnectionState method not available");
+            }
+            
+            try {
+                Method isConnectedMethod = BluetoothDevice.class.getDeclaredMethod("isConnected", (Class[]) null);
+                isConnectedMethod.setAccessible(true);
+                boolean isConnected = (boolean) isConnectedMethod.invoke(device, (Object[]) null);
+                if (isConnected && !BleManager.getInstance().isConnected(mac)) {
+                    return true;
+                }
+            } catch (Exception e) {
+                Log.d(TAG, "isConnected method not available");
+            }
+            
+            return false;
+        } catch (Exception e) {
+            Log.e(TAG, "Error checking device connection state", e);
+            return false;
+        }
     }
 
     private void initConnectTimeoutRunnable() {
@@ -143,11 +214,20 @@ public class BleConnectionManager {
                 }
                 if (uid.startsWith(BleConstant.UID) || uid.toUpperCase().startsWith(BleConstant.UID_SH)) {
                     String mac = BleConfigManager.getInstance().getBleMac();
-                    if (!TextUtils.isEmpty(mac) && !BleManager.getInstance().isConnected(mac)
-                            && mac.equals(bleDevice.getMac()) && !isConnecting) {
-                        LogUtils.e(TAG, "尝试连接：" + mac + ",");
-                        BleManager.getInstance().cancelScan();
-                        connect(mac, null);
+                    if (!TextUtils.isEmpty(mac) && mac.equals(bleDevice.getMac()) && !isConnecting) {
+                        if (isDeviceConnectedToOtherApp(mac)) {
+                            Log.d(TAG, "设备 " + mac + " 已被其他应用连接，取消扫描");
+                            BleManager.getInstance().cancelScan();
+                            if (stateListener != null) {
+                                stateListener.onConnectFailed(mac, "设备已被其他应用占用");
+                            }
+                            return;
+                        }
+                        if (!BleManager.getInstance().isConnected(mac)) {
+                            LogUtils.e(TAG, "尝试连接：" + mac + ",");
+                            BleManager.getInstance().cancelScan();
+                            connect(mac, null);
+                        }
                     }
                 }
             }
@@ -202,6 +282,11 @@ public class BleConnectionManager {
         handler.removeCallbacks(connectTimeoutRunnable);
         handler.postDelayed(connectTimeoutRunnable, 15000);
 
+        if (isDeviceConnectedToOtherApp(mac)) {
+            Log.d(TAG, "设备 " + mac + " 被其他应用占用，尝试断开...");
+            forceDisconnectDevice(mac);
+        }
+
         BleManager.getInstance().destroy();
         BleManager.getInstance().connect(mac, new BleGattCallback() {
             @Override
@@ -222,12 +307,16 @@ public class BleConnectionManager {
                     stateListener.onConnectFailed(mac, errorMsg);
                 }
                 Log.e(TAG, "Connect failed: " + errorMsg);
+                
+                reconnectDelay = Math.min(reconnectDelay * 2, MAX_RECONNECT_DELAY);
+                Log.d(TAG, "Reconnect delay increased to: " + reconnectDelay + "ms");
             }
 
             @Override
             public void onConnectSuccess(BleDevice bleDevice, android.bluetooth.BluetoothGatt gatt, int status) {
                 handler.removeCallbacks(connectTimeoutRunnable);
                 isConnecting = false;
+                reconnectDelay = RECONNECT_INTERVAL;
                 BleConfigManager.getInstance().setBleMac(bleDevice.getMac());
                 BleSdkDevice sdkDevice = new BleSdkDevice(bleDevice);
 
@@ -298,8 +387,11 @@ public class BleConnectionManager {
         this.isAutoConnectEnabled = enabled;
         BleConfigManager.getInstance().setAutoConnectEnabled(enabled);
 
-        if (enabled && !isLoopRunning) {
-            startAutoConnectLoop();
+        if (enabled) {
+            reconnectDelay = RECONNECT_INTERVAL;
+            if (!isLoopRunning) {
+                startAutoConnectLoop();
+            }
         }
     }
 

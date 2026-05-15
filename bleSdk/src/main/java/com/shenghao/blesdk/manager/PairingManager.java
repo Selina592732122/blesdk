@@ -24,6 +24,7 @@ import com.shenghao.blesdk.utils.ByteUtils;
 public class PairingManager {
 
     private static final String TAG = "PairingManager";
+    private static final long PAIRING_TIMEOUT = 30000;
     private static volatile PairingManager instance;
 
     private Context context;
@@ -32,6 +33,7 @@ public class PairingManager {
     private PairingCallback pairingCallback;
     private byte flowFlag;
     private boolean isBonded = false;
+    private Runnable pairingTimeoutRunnable;
 
     private final BroadcastReceiver pairingReceiver = new BroadcastReceiver() {
         @Override
@@ -56,6 +58,7 @@ public class PairingManager {
 
                 switch (bondState) {
                     case BluetoothDevice.BOND_BONDED:
+                        cancelPairingTimeout();
                         isBonded = true;
                         BleConfigManager.getInstance().setBleMac(device.getAddress());
 
@@ -75,6 +78,7 @@ public class PairingManager {
                         }
                         break;
                     case BluetoothDevice.BOND_NONE:
+                        cancelPairingTimeout();
                         isBonded = false;
                         if (previousBondState == BluetoothDevice.BOND_BONDING) {
                             if (pairingCallback != null) {
@@ -173,7 +177,31 @@ public class PairingManager {
         BleConnectionManager connectionManager = com.shenghao.blesdk.BleSdk.getInstance().getBleConnectionManager();
         connectionManager.setAutoConnectEnabled(false);
 
+        startPairingTimeout();
         setupNotification();
+    }
+
+    private void startPairingTimeout() {
+        cancelPairingTimeout();
+        pairingTimeoutRunnable = new Runnable() {
+            @Override
+            public void run() {
+                Log.e(TAG, "配对超时");
+                if (pairingCallback != null) {
+                    pairingCallback.onPairingFailed("配对超时");
+                }
+                BleConnectionManager connectionManager = com.shenghao.blesdk.BleSdk.getInstance().getBleConnectionManager();
+                connectionManager.setAutoConnectEnabled(true);
+            }
+        };
+        handler.postDelayed(pairingTimeoutRunnable, PAIRING_TIMEOUT);
+    }
+
+    private void cancelPairingTimeout() {
+        if (pairingTimeoutRunnable != null) {
+            handler.removeCallbacks(pairingTimeoutRunnable);
+            pairingTimeoutRunnable = null;
+        }
     }
 
     private void setupNotification() {
@@ -190,6 +218,7 @@ public class PairingManager {
 
                     @Override
                     public void onNotifyFailure(BleException exception) {
+                        cancelPairingTimeout();
                         Log.e(TAG, "通知注册失败: " + exception.getDescription());
                         if (pairingCallback != null) {
                             pairingCallback.onPairingFailed("通知注册失败: " + exception.getDescription());
@@ -222,7 +251,7 @@ public class PairingManager {
                     device.createBond();
                 }
             }
-        } else if ((hex.startsWith("ff1212")) || (hex.startsWith("ff120069"))) {
+        } else if ( (hex.startsWith("ff1212")) || (hex.startsWith("ff120069")) ) {
             Log.d(TAG, "收到PKE状态数据");
         }
     }
@@ -284,6 +313,7 @@ public class PairingManager {
 
                     @Override
                     public void onWriteFailure(BleException exception) {
+                        cancelPairingTimeout();
                         Log.e(TAG, "指令发送失败: " + exception.getDescription());
                         if (pairingCallback != null) {
                             pairingCallback.onPairingFailed("指令发送失败: " + exception.getDescription());

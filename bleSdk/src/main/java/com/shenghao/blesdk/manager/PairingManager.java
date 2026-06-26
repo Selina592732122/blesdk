@@ -18,8 +18,10 @@ import com.clj.fastble.data.BleDevice;
 import com.clj.fastble.exception.BleException;
 import com.shenghao.blesdk.BleConstant;
 import com.shenghao.blesdk.command.CommandUtils;
+import com.shenghao.blesdk.entity.VehicleState;
 import com.shenghao.blesdk.utils.BleConfigManager;
 import com.shenghao.blesdk.utils.ByteUtils;
+import com.shenghao.blesdk.utils.VehicleStateParser;
 
 public class PairingManager {
 
@@ -251,8 +253,13 @@ public class PairingManager {
                     device.createBond();
                 }
             }
-        } else if ( (hex.startsWith("ff1212")) || (hex.startsWith("ff120069")) ) {
+        } else if (hex.startsWith("ff1212") || hex.startsWith("ff120069")) {
             Log.d(TAG, "收到PKE状态数据");
+            byte[] data = ByteUtils.hexStr2Bytes(hex);
+            VehicleState vehicleState = VehicleStateParser.parse(data);
+            if (vehicleState != null && pairingCallback != null) {
+                pairingCallback.onVehicleStateChanged(vehicleState);
+            }
         }
     }
 
@@ -333,6 +340,7 @@ public class PairingManager {
         void onPairingSuccess();
         void onPairingFailed(String errorMessage);
         void onPairingCancelled();
+        void onVehicleStateChanged(VehicleState vehicleState);
     }
 
     public static abstract class SimplePairingCallback implements PairingCallback {
@@ -350,5 +358,8 @@ public class PairingManager {
 
         @Override
         public void onPairingCancelled() {}
+
+        @Override
+        public void onVehicleStateChanged(VehicleState vehicleState) {}
     }
 }

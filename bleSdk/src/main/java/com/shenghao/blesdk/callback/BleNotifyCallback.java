@@ -1,5 +1,6 @@
 package com.shenghao.blesdk.callback;
 
+import com.shenghao.blesdk.entity.VehicleState;
 import com.shenghao.blesdk.exception.BleSdkException;
 
 public interface BleNotifyCallback {
@@ -9,4 +10,7 @@ public interface BleNotifyCallback {
     void onNotifyFailed(BleSdkException exception);
 
     void onCharacteristicChanged(byte[] data);
+
+    default void onVehicleStateChanged(VehicleState vehicleState) {
+    }
 }

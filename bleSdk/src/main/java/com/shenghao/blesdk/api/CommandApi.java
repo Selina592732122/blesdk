@@ -92,6 +92,7 @@ public class CommandApi {
                     public void onCharacteristicChanged(byte[] data) {
                         if (callback != null) {
                             callback.onCharacteristicChanged(data);
+                            parseAndNotifyVehicleState(data, callback);
                         }
                     }
                 }
@@ -125,10 +126,19 @@ public class CommandApi {
                     public void onCharacteristicChanged(byte[] data) {
                         if (callback != null) {
                             callback.onCharacteristicChanged(data);
+                            parseAndNotifyVehicleState(data, callback);
                         }
                     }
                 }
         );
+    }
+
+    private static void parseAndNotifyVehicleState(byte[] data, com.shenghao.blesdk.callback.BleNotifyCallback callback) {
+        com.shenghao.blesdk.entity.VehicleState vehicleState = 
+                com.shenghao.blesdk.utils.VehicleStateParser.parse(data);
+        if (vehicleState != null && callback != null) {
+            callback.onVehicleStateChanged(vehicleState);
+        }
     }
 
     public static String buildRssiLimitCommand(boolean connect, int value) {

@@ -27,6 +27,7 @@ import com.shenghao.blesdk.callback.BleNotifyCallback;
 import com.shenghao.blesdk.callback.BleScanCallback;
 import com.shenghao.blesdk.callback.BleStateListener;
 import com.shenghao.blesdk.entity.BleSdkDevice;
+import com.shenghao.blesdk.entity.VehicleState;
 import com.shenghao.blesdk.enums.BlueRssiPke;
 import com.shenghao.blesdk.exception.BleSdkException;
 import com.shenghao.blesdk.listener.BluetoothStateChangeListener;
@@ -67,6 +68,12 @@ public class BleSdkDemoActivity extends BaseActivity {
     private Button btnNotify;
     private Switch switchPKE;
     private ProgressBar progressBar;
+
+    // 车辆状态显示
+    private TextView tvPkeState;
+    private TextView tvCurrentRssi;
+    private TextView tvUnlockRssi;
+    private TextView tvLockRssi;
 
     private DeviceAdapter deviceAdapter;
     private List<BleSdkDevice> deviceList = new ArrayList<>();
@@ -113,6 +120,12 @@ public class BleSdkDemoActivity extends BaseActivity {
         btnNotify = findViewById(R.id.btn_notify);
         switchPKE = findViewById(R.id.switch_pke);
         progressBar = findViewById(R.id.progress_bar);
+
+        // 初始化车辆状态显示
+        tvPkeState = findViewById(R.id.tv_pke_state);
+        tvCurrentRssi = findViewById(R.id.tv_current_rssi);
+        tvUnlockRssi = findViewById(R.id.tv_unlock_rssi);
+        tvLockRssi = findViewById(R.id.tv_lock_rssi);
     }
 
     private void initAdapter() {
@@ -390,6 +403,17 @@ public class BleSdkDemoActivity extends BaseActivity {
                 String hex = ByteUtils.bytes2HexStr(data);
                 Log.d(TAG, "收到数据: " + hex);
             }
+
+            @Override
+            public void onVehicleStateChanged(VehicleState vehicleState) {
+                runOnUiThread(() -> {
+                    tvPkeState.setText((vehicleState.isPkeEnabled() ? "已开启" : "已关闭") + " / " + 
+                            (vehicleState.isPkeConnected() ? "PKE已连接" : "PKE未连接"));
+                    tvCurrentRssi.setText(String.valueOf(vehicleState.getCurrentRssi()));
+                    tvUnlockRssi.setText(String.valueOf(vehicleState.getUnlockRssi()));
+                    tvLockRssi.setText(String.valueOf(vehicleState.getLockRssi()));
+                });
+            }
         });
     }
 
@@ -500,6 +524,17 @@ public class BleSdkDemoActivity extends BaseActivity {
                     tvStatus.setText("配对已取消");
                     btnPair.setText("去配对");
                     btnPair.setEnabled(selectedDevice != null);
+                });
+            }
+
+            @Override
+            public void onVehicleStateChanged(com.shenghao.blesdk.entity.VehicleState vehicleState) {
+                runOnUiThread(() -> {
+                    tvPkeState.setText((vehicleState.isPkeEnabled() ? "已开启" : "已关闭") + " / " + 
+                            (vehicleState.isPkeConnected() ? "PKE已连接" : "PKE未连接"));
+                    tvCurrentRssi.setText(String.valueOf(vehicleState.getCurrentRssi()));
+                    tvUnlockRssi.setText(String.valueOf(vehicleState.getUnlockRssi()));
+                    tvLockRssi.setText(String.valueOf(vehicleState.getLockRssi()));
                 });
             }
         });

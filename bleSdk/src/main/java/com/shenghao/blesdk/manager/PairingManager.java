@@ -215,7 +215,7 @@ public class PairingManager {
                     @Override
                     public void onNotifySuccess() {
                         Log.d(TAG, "通知注册成功");
-                        sendClearPairingCommand();
+                        sendAllowPairingCommand();
                     }
 
                     @Override
@@ -240,17 +240,14 @@ public class PairingManager {
     }
 
     private void handleNotificationData(String hex) {
-        if (hex.startsWith("ff120080")) {
-            Log.d(TAG, "收到配对请求响应");
-            sendAllowPairingCommand();
-        } else if (hex.startsWith("ff120018")) {
+        if (hex.startsWith("ff120018")) {
             byte[] bytes = ByteUtils.hexStr2Bytes(hex);
             if (!isBonded && flowFlag == bytes[4]) {
                 Log.d(TAG, "流水号匹配，开始蓝牙配对");
                 BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
                 if (adapter != null && bleDevice != null) {
-                    BluetoothDevice device = adapter.getRemoteDevice(bleDevice.getMac());
-                    device.createBond();
+//                    BluetoothDevice device = adapter.getRemoteDevice(bleDevice.getMac());
+//                    device.createBond();
                 }
             }
         } else if (hex.startsWith("ff1212") || hex.startsWith("ff120069")) {

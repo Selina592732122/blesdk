@@ -40,7 +40,7 @@ public class VehicleStateParser {
         LogUtils.e(TAG, "收到数据: " + hex);
 
         // 检查报文头
-        if (!hex.startsWith("FF12")) {
+        if (!hex.startsWith("ff12")) {
             LogUtils.e(TAG, "无效的报文头");
             return null;
         }

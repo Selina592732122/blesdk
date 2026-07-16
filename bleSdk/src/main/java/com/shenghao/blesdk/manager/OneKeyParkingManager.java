@@ -238,6 +238,42 @@ public class OneKeyParkingManager {
         generateAutoParkingCommand(0, 0, true, false, false);
     }
 
+    /**
+     * 发送挪车请求进入指令
+     * BIT4 = 1 表示挪车请求进入
+     */
+    public void requestEnterParking() {
+        byte control1 = BleConstant.PARKING_ENTER;
+        byte[] body = new byte[]{control1, 0, 0, 0x01, 0, 0, 0};
+        byte[] command = CommandUtils.generateCommand((byte) 0x00, (byte) 0x20, body);
+        
+        CommandWrapper wrapper = new CommandWrapper(command, true);
+        synchronized (queueLock) {
+            commandQueue.clear();
+            commandQueue.offer(wrapper);
+            trySendImmediately();
+        }
+        LogUtils.e(TAG, "发送挪车请求进入指令");
+    }
+
+    /**
+     * 发送挪车请求退出指令
+     * BIT5 = 1 表示挪车请求退出
+     */
+    public void requestExitParking() {
+        byte control1 = BleConstant.PARKING_EXIT;
+        byte[] body = new byte[]{control1, 0, 0, 0x00, 0, 0, 0};
+        byte[] command = CommandUtils.generateCommand((byte) 0x00, (byte) 0x20, body);
+        
+        CommandWrapper wrapper = new CommandWrapper(command, true);
+        synchronized (queueLock) {
+            commandQueue.clear();
+            commandQueue.offer(wrapper);
+            trySendImmediately();
+        }
+        LogUtils.e(TAG, "发送挪车请求退出指令");
+    }
+
     private void write(byte[] bytes) {
         if (bleDevice == null || !BleManager.getInstance().isConnected(bleDevice)) {
             LogUtils.e(TAG, "蓝牙设备未连接");
@@ -248,7 +284,7 @@ public class OneKeyParkingManager {
         BleManager.getInstance().write(
                 bleDevice,
                 BleConstant.SERVICE_UUID_SH,
-                BleConstant.NOTIFY_UUID_SH,
+                BleConstant.WRITE_UUID_SH,
                 bytes,
                 new BleWriteCallback() {
                     @Override

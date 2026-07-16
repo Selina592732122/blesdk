@@ -46,12 +46,12 @@ afterEvaluate {
                     "${variant.name}"(MavenPublication) {
                         groupId = 'com.github.Selina592732122'
                         artifactId = 'blesdk'
-                        version = 'v1.1.7'
+                        version = 'v1.1.8'
                         artifact("$buildDir/outputs/aar/${project.name}-${variant.name}.aar")
-                        
+
                         pom.withXml {
                             def dependenciesNode = asNode().appendNode('dependencies')
-                            
+
                             configurations.api.allDependencies.each { dependency ->
                                 def dependencyNode = dependenciesNode.appendNode('dependency')
                                 dependencyNode.appendNode('groupId', dependency.group)
@@ -59,7 +59,7 @@ afterEvaluate {
                                 dependencyNode.appendNode('version', dependency.version)
                                 dependencyNode.appendNode('scope', 'compile')
                             }
-                            
+
                             configurations.implementation.allDependencies.each { dependency ->
                                 def dependencyNode = dependenciesNode.appendNode('dependency')
                                 dependencyNode.appendNode('groupId', dependency.group)
@@ -71,7 +71,7 @@ afterEvaluate {
                     }
                 }
             }
-            
+
             tasks.named("publish${variant.name.capitalize()}PublicationToMavenLocal") {
                 dependsOn("assemble${variant.name.capitalize()}")
             }

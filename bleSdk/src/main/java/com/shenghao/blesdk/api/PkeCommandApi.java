@@ -63,7 +63,7 @@ public class PkeCommandApi {
             control1 |= 0x02;
         }
         if (allowPairing) {
-            control1 |= 0x04;
+            control1 |= 0x10;
         }
         if (disconnect) {
             control1 |= 0x08;

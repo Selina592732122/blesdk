@@ -327,6 +327,8 @@ public class BleConnectionManager {
                     stateListener.onConnected(bleDevice.getMac(), sdkDevice);
                 }
                 Log.d(TAG, "Connect success: " + bleDevice.getName() + " (" + bleDevice.getMac() + ")");
+
+                autoStartPairing(bleDevice);
             }
 
             @Override
@@ -357,6 +359,24 @@ public class BleConnectionManager {
 
     public void disconnectAll() {
         BleManager.getInstance().disconnectAllDevice();
+    }
+
+    private void autoStartPairing(BleDevice bleDevice) {
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT)
+                != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+
+        BluetoothDevice device = bluetoothAdapter.getRemoteDevice(bleDevice.getMac());
+        if (device.getBondState() == BluetoothDevice.BOND_BONDED) {
+            Log.d(TAG, "设备已配对，跳过自动配对");
+            return;
+        }
+
+        Log.d(TAG, "设备未配对，自动发起配对");
+        PairingManager pairingManager = BleSdk.getInstance().getPairingManager();
+        pairingManager.setBleDevice(new BleSdkDevice(bleDevice));
+        pairingManager.startPairing(null);
     }
 
     public boolean isConnected(String mac) {

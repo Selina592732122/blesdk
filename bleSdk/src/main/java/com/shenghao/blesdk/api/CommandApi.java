@@ -7,9 +7,15 @@ import com.clj.fastble.data.BleDevice;
 import com.clj.fastble.exception.BleException;
 import com.shenghao.blesdk.BleConstant;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CommandApi {
 
     private static final String TAG = "CommandApi";
+    private static List<com.shenghao.blesdk.callback.BleNotifyCallback> notifyCallbacks = new ArrayList<>();
+    private static boolean isNotifyRegistered = false;
+    private static BleDevice currentNotifyDevice = null;
 
     public static void sendCommand(BleDevice bleDevice, String command, com.shenghao.blesdk.callback.BleWriteCallback callback) {
         if (command == null) {
@@ -67,70 +73,73 @@ public class CommandApi {
     }
 
     public static void setNotifyListener(com.shenghao.blesdk.entity.BleSdkDevice bleDevice, com.shenghao.blesdk.callback.BleNotifyCallback callback) {
-        BleManager.getInstance().notify(
-                bleDevice.getOriginalDevice(),
-                BleConstant.SERVICE_UUID_SH,
-                BleConstant.NOTIFY_UUID_SH,
-                new BleNotifyCallback() {
-                    @Override
-                    public void onNotifySuccess() {
-                        if (callback != null) {
-                            callback.onNotifySuccess();
-                        }
-                    }
-
-                    @Override
-                    public void onNotifyFailure(BleException exception) {
-                        if (callback != null) {
-                            callback.onNotifyFailed(new com.shenghao.blesdk.exception.BleSdkException(
-                                    com.shenghao.blesdk.exception.BleSdkException.CODE_WRITE_ERROR,
-                                    exception != null ? exception.getDescription() : "Notify failed"));
-                        }
-                    }
-
-                    @Override
-                    public void onCharacteristicChanged(byte[] data) {
-                        if (callback != null) {
-                            callback.onCharacteristicChanged(data);
-                            parseAndNotifyVehicleState(data, callback);
-                        }
-                    }
-                }
-        );
+        setNotifyListener(bleDevice.getOriginalDevice(), BleConstant.SERVICE_UUID_SH, BleConstant.NOTIFY_UUID_SH, callback);
     }
 
     public static void setNotifyListener(BleDevice bleDevice, String serviceUUID, String notifyUUID,
             com.shenghao.blesdk.callback.BleNotifyCallback callback) {
-        BleManager.getInstance().notify(
-                bleDevice,
-                serviceUUID,
-                notifyUUID,
-                new BleNotifyCallback() {
-                    @Override
-                    public void onNotifySuccess() {
-                        if (callback != null) {
-                            callback.onNotifySuccess();
-                        }
-                    }
+        if (callback != null) {
+            notifyCallbacks.add(callback);
+        }
 
-                    @Override
-                    public void onNotifyFailure(BleException exception) {
-                        if (callback != null) {
-                            callback.onNotifyFailed(new com.shenghao.blesdk.exception.BleSdkException(
-                                    com.shenghao.blesdk.exception.BleSdkException.CODE_WRITE_ERROR,
-                                    exception != null ? exception.getDescription() : "Notify failed"));
+        if (!isNotifyRegistered || currentNotifyDevice == null || !currentNotifyDevice.equals(bleDevice)) {
+            currentNotifyDevice = bleDevice;
+            isNotifyRegistered = false;
+            
+            BleManager.getInstance().notify(
+                    bleDevice,
+                    serviceUUID,
+                    notifyUUID,
+                    new BleNotifyCallback() {
+                        @Override
+                        public void onNotifySuccess() {
+                            isNotifyRegistered = true;
+                            for (com.shenghao.blesdk.callback.BleNotifyCallback cb : new ArrayList<>(notifyCallbacks)) {
+                                try {
+                                    cb.onNotifySuccess();
+                                } catch (Exception e) {
+                                    // ignore
+                                }
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onCharacteristicChanged(byte[] data) {
-                        if (callback != null) {
-                            callback.onCharacteristicChanged(data);
-                            parseAndNotifyVehicleState(data, callback);
+                        @Override
+                        public void onNotifyFailure(BleException exception) {
+                            isNotifyRegistered = false;
+                            for (com.shenghao.blesdk.callback.BleNotifyCallback cb : new ArrayList<>(notifyCallbacks)) {
+                                try {
+                                    cb.onNotifyFailed(new com.shenghao.blesdk.exception.BleSdkException(
+                                            com.shenghao.blesdk.exception.BleSdkException.CODE_WRITE_ERROR,
+                                            exception != null ? exception.getDescription() : "Notify failed"));
+                                } catch (Exception e) {
+                                    // ignore
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCharacteristicChanged(byte[] data) {
+                            for (com.shenghao.blesdk.callback.BleNotifyCallback cb : new ArrayList<>(notifyCallbacks)) {
+                                try {
+                                    cb.onCharacteristicChanged(data);
+                                    parseAndNotifyVehicleState(data, cb);
+                                } catch (Exception e) {
+                                    // ignore
+                                }
+                            }
                         }
                     }
-                }
-        );
+            );
+        }
+    }
+
+    public static void removeNotifyListener(com.shenghao.blesdk.callback.BleNotifyCallback callback) {
+        notifyCallbacks.remove(callback);
+    }
+
+
+    public static void clearAllNotifyListeners() {
+        notifyCallbacks.clear();
     }
 
     private static void parseAndNotifyVehicleState(byte[] data, com.shenghao.blesdk.callback.BleNotifyCallback callback) {

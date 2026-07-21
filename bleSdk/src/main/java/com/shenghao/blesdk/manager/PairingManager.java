@@ -17,6 +17,7 @@ import com.clj.fastble.callback.BleWriteCallback;
 import com.clj.fastble.data.BleDevice;
 import com.clj.fastble.exception.BleException;
 import com.shenghao.blesdk.BleConstant;
+import com.shenghao.blesdk.api.CommandApi;
 import com.shenghao.blesdk.command.CommandUtils;
 import com.shenghao.blesdk.entity.VehicleState;
 import com.shenghao.blesdk.utils.BleConfigManager;
@@ -67,6 +68,8 @@ public class PairingManager {
                         if (pairingCallback != null) {
                             pairingCallback.onPairingSuccess();
                         }
+
+                        removePairingNotifyCallback();
 
                         handler.postDelayed(() -> {
 //                            sendDisconnectCommand();
@@ -206,37 +209,44 @@ public class PairingManager {
         }
     }
 
+    private void removePairingNotifyCallback() {
+        if (pairingNotifyCallback != null) {
+            CommandApi.removeNotifyListener(pairingNotifyCallback);
+            pairingNotifyCallback = null;
+            Log.d(TAG, "配对完成，已移除通知回调");
+        }
+    }
+
+    private com.shenghao.blesdk.callback.BleNotifyCallback pairingNotifyCallback;
+
     private void setupNotification() {
-        BleManager.getInstance().notify(
-                bleDevice,
-                BleConstant.SERVICE_UUID_SH,
-                BleConstant.NOTIFY_UUID_SH,
-                new BleNotifyCallback() {
-                    @Override
-                    public void onNotifySuccess() {
-                        Log.d(TAG, "通知注册成功");
-                        sendAllowPairingCommand();
-                    }
+        pairingNotifyCallback = new com.shenghao.blesdk.callback.BleNotifyCallback() {
+            @Override
+            public void onNotifySuccess() {
+                Log.d(TAG, "通知注册成功");
+                sendAllowPairingCommand();
+            }
 
-                    @Override
-                    public void onNotifyFailure(BleException exception) {
-                        cancelPairingTimeout();
-                        Log.e(TAG, "通知注册失败: " + exception.getDescription());
-                        if (pairingCallback != null) {
-                            pairingCallback.onPairingFailed("通知注册失败: " + exception.getDescription());
-                        }
-                        BleConnectionManager connectionManager = com.shenghao.blesdk.BleSdk.getInstance().getBleConnectionManager();
-                        connectionManager.setAutoConnectEnabled(true);
-                    }
-
-                    @Override
-                    public void onCharacteristicChanged(byte[] data) {
-                        String hex = ByteUtils.bytes2HexStr(data);
-                        Log.d(TAG, "收到数据: " + hex);
-                        handleNotificationData(hex);
-                    }
+            @Override
+            public void onNotifyFailed(com.shenghao.blesdk.exception.BleSdkException exception) {
+                cancelPairingTimeout();
+                Log.e(TAG, "通知注册失败: " + exception.getDescription());
+                if (pairingCallback != null) {
+                    pairingCallback.onPairingFailed("通知注册失败: " + exception.getDescription());
                 }
-        );
+                BleConnectionManager connectionManager = com.shenghao.blesdk.BleSdk.getInstance().getBleConnectionManager();
+                connectionManager.setAutoConnectEnabled(true);
+            }
+
+            @Override
+            public void onCharacteristicChanged(byte[] data) {
+                String hex = ByteUtils.bytes2HexStr(data);
+                Log.d(TAG, "收到数据: " + hex);
+                handleNotificationData(hex);
+            }
+        };
+
+        CommandApi.setNotifyListener(bleDevice, BleConstant.SERVICE_UUID_SH, BleConstant.NOTIFY_UUID_SH, pairingNotifyCallback);
     }
 
     private void handleNotificationData(String hex) {

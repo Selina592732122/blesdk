@@ -40,11 +40,10 @@ public class VehicleStateParser {
         LogUtils.e(TAG, "收到数据: " + hex);
 
         // 检查报文头
-        if (!hex.startsWith("ff12")) {
+        if (!hex.toLowerCase().startsWith("ff12")) {
             LogUtils.e(TAG, "无效的报文头");
             return null;
         }
-
         // 获取命令码（解密后的第3个字节）
         byte commandCode = data[3];
 

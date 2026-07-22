@@ -69,8 +69,8 @@ public class VehicleStateParser {
      * 解析 0x7A 挪车反馈数据
      *
      * 协议结构:
-     * FF 12 00 7A [流水号] [反馈数据] [失效原因1] [失效原因2] [保留] [SUM]
-     * - 反馈数据: BIT0=有效/无效
+     * FF 12 00 7A [流水号] [预留(0x00)] [反馈数据] [失效原因1] [失效原因2] [保留] [SUM]
+     * - 反馈数据(第6字节, data[6]): BIT0=有效/无效
      * - 失效原因1: BIT0=车门开启, BIT1=车辆非静止, BIT2=车辆故障, BIT3=坡道驻停,
      *              BIT4=无指令异常位移, BIT5=人为控车, BIT6=蓝牙信号异常, BIT7=控制器通讯异常
      * - 失效原因2: BIT0=用户手动退出, BIT1=节点通讯异常, BIT2=超时退出, BIT3=挪车车速异常
@@ -102,15 +102,16 @@ public class VehicleStateParser {
             return state;
         }
 
-        // decrypted[0] = 0x7A (命令码)
-        // decrypted[1] = 流水号
-        // decrypted[2] = 挪车反馈数据
-        // decrypted[3] = 失效原因1
-        // decrypted[4] = 失效原因2
+        // decrypted[0] = 0x7A (命令码) → data[3]
+        // decrypted[1] = 流水号        → data[4]
+        // decrypted[2] = 预留          → data[5] = 0x00
+        // decrypted[3] = 挪车反馈数据  → data[6] = moveCarFeedbackState (硬件packet[6])
+        // decrypted[4] = 失效原因1     → data[7] = failCause1
+        // decrypted[5] = 失效原因2     → data[8] = failCause2
 
-        byte feedbackData = decrypted.length > 2 ? decrypted[2] : 0;
-        byte failureReason1 = decrypted.length > 3 ? decrypted[3] : 0;
-        byte failureReason2 = decrypted.length > 4 ? decrypted[4] : 0;
+        byte feedbackData = decrypted.length > 3 ? decrypted[3] : 0;
+        byte failureReason1 = decrypted.length > 4 ? decrypted[4] : 0;
+        byte failureReason2 = decrypted.length > 5 ? decrypted[5] : 0;
 
         // 解析反馈状态
         boolean isValid = (feedbackData & 0x01) != 0;

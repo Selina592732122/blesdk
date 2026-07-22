@@ -219,23 +219,40 @@ public class PairingManager {
 
     private com.shenghao.blesdk.callback.BleNotifyCallback pairingNotifyCallback;
 
+    private int notifyRetryCount = 0;
+    private static final int MAX_NOTIFY_RETRY = 3;
+
     private void setupNotification() {
+        notifyRetryCount = 0;
         pairingNotifyCallback = new com.shenghao.blesdk.callback.BleNotifyCallback() {
             @Override
             public void onNotifySuccess() {
                 Log.d(TAG, "通知注册成功");
+                notifyRetryCount = 0;
                 sendAllowPairingCommand();
             }
 
             @Override
             public void onNotifyFailed(com.shenghao.blesdk.exception.BleSdkException exception) {
-                cancelPairingTimeout();
-                Log.e(TAG, "通知注册失败: " + exception.getDescription());
-                if (pairingCallback != null) {
-                    pairingCallback.onPairingFailed("通知注册失败: " + exception.getDescription());
+                notifyRetryCount++;
+                Log.e(TAG, "通知注册失败(" + notifyRetryCount + "/" + MAX_NOTIFY_RETRY + "): " + exception.getDescription());
+                
+                if (notifyRetryCount < MAX_NOTIFY_RETRY) {
+                    Log.d(TAG, "延迟300ms后重试通知注册");
+                    new android.os.Handler().postDelayed(() -> {
+                        if (bleDevice != null && com.clj.fastble.BleManager.getInstance().isConnected(bleDevice)) {
+                            CommandApi.setNotifyListener(bleDevice, BleConstant.SERVICE_UUID_SH, BleConstant.NOTIFY_UUID_SH, pairingNotifyCallback);
+                        }
+                    }, 300);
+                } else {
+                    cancelPairingTimeout();
+                    Log.e(TAG, "通知注册重试次数已达上限");
+                    if (pairingCallback != null) {
+                        pairingCallback.onPairingFailed("通知注册失败: " + exception.getDescription());
+                    }
+                    BleConnectionManager connectionManager = com.shenghao.blesdk.BleSdk.getInstance().getBleConnectionManager();
+                    connectionManager.setAutoConnectEnabled(true);
                 }
-                BleConnectionManager connectionManager = com.shenghao.blesdk.BleSdk.getInstance().getBleConnectionManager();
-                connectionManager.setAutoConnectEnabled(true);
             }
 
             @Override

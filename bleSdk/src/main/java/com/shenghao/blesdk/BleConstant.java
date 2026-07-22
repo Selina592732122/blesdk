@@ -308,7 +308,7 @@ public class BleConstant {
     public static final byte PARKING_ENTER = 0x10;
 
     /** 挪车请求退出 */
-    public static final byte PARKING_EXIT = 0x00;
+    public static final byte PARKING_EXIT = 0x20;
 
     // ==================== 车辆控制位定义 ====================
 

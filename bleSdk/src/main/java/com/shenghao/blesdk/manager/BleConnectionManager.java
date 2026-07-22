@@ -373,10 +373,16 @@ public class BleConnectionManager {
             return;
         }
 
-        Log.d(TAG, "设备未配对，自动发起配对");
-        PairingManager pairingManager = BleSdk.getInstance().getPairingManager();
-        pairingManager.setBleDevice(new BleSdkDevice(bleDevice));
-        pairingManager.startPairing(null);
+        Log.d(TAG, "设备未配对，延迟500ms后自动发起配对");
+        handler.postDelayed(() -> {
+            if (BleManager.getInstance().isConnected(bleDevice)) {
+                PairingManager pairingManager = BleSdk.getInstance().getPairingManager();
+                pairingManager.setBleDevice(new BleSdkDevice(bleDevice));
+                pairingManager.startPairing(null);
+            } else {
+                Log.d(TAG, "设备已断开连接，取消自动配对");
+            }
+        }, 500);
     }
 
     public boolean isConnected(String mac) {

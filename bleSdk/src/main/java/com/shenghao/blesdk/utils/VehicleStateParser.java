@@ -104,8 +104,8 @@ public class VehicleStateParser {
 
         // decrypted[0] = 0x7A (命令码) → data[3]
         // decrypted[1] = 流水号        → data[4]
-        // decrypted[2] = 预留          → data[5] = 0x00
-        // decrypted[3] = 挪车反馈数据  → data[6] = moveCarFeedbackState (硬件packet[6])
+        // decrypted[2] = 预留字段       → data[5]
+        // decrypted[3] = 挪车反馈数据  → data[6] = moveCarFeedbackState
         // decrypted[4] = 失效原因1     → data[7] = failCause1
         // decrypted[5] = 失效原因2     → data[8] = failCause2
 
@@ -113,8 +113,8 @@ public class VehicleStateParser {
         byte failureReason1 = decrypted.length > 4 ? decrypted[4] : 0;
         byte failureReason2 = decrypted.length > 5 ? decrypted[5] : 0;
 
-        // 解析反馈状态
-        boolean isValid = (feedbackData & 0x01) != 0;
+        // 解析反馈状态：BIT0=0表示有效，BIT0=1表示无效
+        boolean isValid = (feedbackData & 0x01) == 0;
         state.setParkingValid(isValid);
 
         LogUtils.e(TAG, "挪车反馈: " + (isValid ? "有效" : "无效"));

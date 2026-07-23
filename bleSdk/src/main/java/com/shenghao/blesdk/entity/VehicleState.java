@@ -82,9 +82,9 @@ public class VehicleState {
      * 挪车状态枚举
      */
     public enum ParkingStatus {
-        NOT_ENTERED(0x00, "未进入挪车状态"),
-        VALID(0x01, "进入挪车反馈有效"),
-        INVALID(0x02, "进入挪车反馈无效");
+        NOT_ENTERED(0x10, "未进入挪车状态"),
+        VALID(0x00, "进入挪车反馈有效"),
+        INVALID(0x01, "进入挪车反馈无效");
 
         private final int value;
         private final String description;

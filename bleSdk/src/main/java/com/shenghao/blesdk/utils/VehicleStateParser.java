@@ -68,9 +68,9 @@ public class VehicleStateParser {
     /**
      * 解析 0x7A 挪车反馈数据
      *
-     * 协议结构(新):
-     * FF 12 00 7A [流水号] [预留(0x00)] [挪车状态] [无效原因1] [无效原因2] [保留] [SUM]
-     * - 挪车状态(第1字节): 0x00=未进入挪车状态, 0x01=进入挪车反馈有效, 0x02=进入挪车反馈无效
+     * 协议结构:
+     * FF 12 00 7A [流水号] [预留] [挪车状态] [无效原因1] [无效原因2] [保留] [SUM]
+     * - 挪车状态: 0x10=未进入挪车状态, 0x00=进入挪车反馈有效, 0x01=进入挪车反馈无效
      * - 无效原因1(第2字节): BIT0=车门开启, BIT1=车辆非静止, BIT2=车辆故障, BIT3=坡道驻停中,
      *                      BIT4=刹车开关有效, BIT5=无指令异常位移, BIT6=人为控车, BIT7=蓝牙信号异常
      * - 无效原因2(第3字节): BIT0=控制器通讯异常, BIT1=用户手动退出, BIT2=节点通讯异常,
@@ -102,28 +102,16 @@ public class VehicleStateParser {
 
         // decrypted[0] = 0x7A (命令码)
         // decrypted[1] = 流水号
-        // decrypted[2] = 控制字段 (BLE_BIT_MOVE_CAR_FEEDBACK = 0x01 表示进入挪车状态)
-        // decrypted[3] = 挪车反馈状态 (0x00=有效, 0x01=无效)
+        // decrypted[2] = 预留
+        // decrypted[3] = 挪车状态 (0x10=未进入, 0x00=有效, 0x01=无效)
         // decrypted[4] = 无效原因1
         // decrypted[5] = 无效原因2
 
-        byte controlField = decrypted.length > 2 ? decrypted[2] : 0;
-        byte feedbackState = decrypted.length > 3 ? decrypted[3] : 0;
+        byte parkingStatusByte = decrypted.length > 3 ? decrypted[3] : 0;
         byte failureReason1 = decrypted.length > 4 ? decrypted[4] : 0;
         byte failureReason2 = decrypted.length > 5 ? decrypted[5] : 0;
 
-        // 解析挪车状态
-        VehicleState.ParkingStatus parkingStatus;
-        if ((controlField & 0x01) == 0) {
-            // 未进入挪车状态
-            parkingStatus = VehicleState.ParkingStatus.NOT_ENTERED;
-        } else if ((feedbackState & 0x01) == 0) {
-            // 已进入挪车状态，反馈有效
-            parkingStatus = VehicleState.ParkingStatus.VALID;
-        } else {
-            // 已进入挪车状态，反馈无效
-            parkingStatus = VehicleState.ParkingStatus.INVALID;
-        }
+        VehicleState.ParkingStatus parkingStatus = VehicleState.ParkingStatus.fromValue(parkingStatusByte & 0xFF);
         state.setParkingStatus(parkingStatus);
 
         LogUtils.e(TAG, "挪车状态: " + parkingStatus.getDescription());

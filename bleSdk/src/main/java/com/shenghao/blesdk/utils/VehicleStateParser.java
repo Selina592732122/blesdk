@@ -102,17 +102,28 @@ public class VehicleStateParser {
 
         // decrypted[0] = 0x7A (命令码)
         // decrypted[1] = 流水号
-        // decrypted[2] = 预留字段
-        // decrypted[3] = 挪车状态 (0x00=未进入, 0x01=有效, 0x02=无效)
+        // decrypted[2] = 控制字段 (BLE_BIT_MOVE_CAR_FEEDBACK = 0x01 表示进入挪车状态)
+        // decrypted[3] = 挪车反馈状态 (0x00=有效, 0x01=无效)
         // decrypted[4] = 无效原因1
         // decrypted[5] = 无效原因2
 
-        byte parkingStatusValue = decrypted.length > 3 ? decrypted[3] : 0;
+        byte controlField = decrypted.length > 2 ? decrypted[2] : 0;
+        byte feedbackState = decrypted.length > 3 ? decrypted[3] : 0;
         byte failureReason1 = decrypted.length > 4 ? decrypted[4] : 0;
         byte failureReason2 = decrypted.length > 5 ? decrypted[5] : 0;
 
-        // 解析挪车状态（三态）
-        VehicleState.ParkingStatus parkingStatus = VehicleState.ParkingStatus.fromValue(parkingStatusValue & 0xFF);
+        // 解析挪车状态
+        VehicleState.ParkingStatus parkingStatus;
+        if ((controlField & 0x01) == 0) {
+            // 未进入挪车状态
+            parkingStatus = VehicleState.ParkingStatus.NOT_ENTERED;
+        } else if ((feedbackState & 0x01) == 0) {
+            // 已进入挪车状态，反馈有效
+            parkingStatus = VehicleState.ParkingStatus.VALID;
+        } else {
+            // 已进入挪车状态，反馈无效
+            parkingStatus = VehicleState.ParkingStatus.INVALID;
+        }
         state.setParkingStatus(parkingStatus);
 
         LogUtils.e(TAG, "挪车状态: " + parkingStatus.getDescription());

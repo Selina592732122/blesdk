@@ -75,8 +75,42 @@ public class VehicleState {
 
     // ==================== 挪车反馈数据(0x7A)字段 ====================
     private boolean parkingFeedbackEnabled;  // 挪车请求反馈有效
-    private boolean parkingValid;           // 挪车有效/无效
+    private ParkingStatus parkingStatus;     // 挪车状态（三态）
     private Set<ParkingFailureReason> parkingFailureReasons; // 挪车失效原因集合
+
+    /**
+     * 挪车状态枚举
+     */
+    public enum ParkingStatus {
+        NOT_ENTERED(0x00, "未进入挪车状态"),
+        VALID(0x01, "进入挪车反馈有效"),
+        INVALID(0x02, "进入挪车反馈无效");
+
+        private final int value;
+        private final String description;
+
+        ParkingStatus(int value, String description) {
+            this.value = value;
+            this.description = description;
+        }
+
+        public int getValue() {
+            return value;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public static ParkingStatus fromValue(int value) {
+            for (ParkingStatus status : values()) {
+                if (status.value == value) {
+                    return status;
+                }
+            }
+            return NOT_ENTERED;
+        }
+    }
 
     /**
      * 挪车失效原因枚举
@@ -86,14 +120,15 @@ public class VehicleState {
         VEHICLE_NOT_STATIONARY(1, "车辆非静止"),
         VEHICLE_FAULT(2, "车辆故障"),
         PARKED_ON_SLOPE(3, "坡道驻停中"),
-        ABNORMAL_DISPLACEMENT(4, "无指令异常位移"),
-        MANUAL_CONTROL(5, "人为控车"),
-        BLUETOOTH_SIGNAL_ABNORMAL(6, "蓝牙信号异常"),
-        CONTROLLER_COMM_ERROR(7, "控制器通讯异常"),
-        USER_MANUAL_EXIT(8, "用户手动退出"),
-        NODE_COMM_ERROR(9, "节点通讯异常"),
-        TIMEOUT_EXIT(10, "超时退出"),
-        PARKING_SPEED_ABNORMAL(11, "挪车车速异常");
+        BRAKE_SWITCH_VALID(4, "刹车开关有效"),
+        ABNORMAL_DISPLACEMENT(5, "无指令异常位移"),
+        MANUAL_CONTROL(6, "人为控车"),
+        BLUETOOTH_SIGNAL_ABNORMAL(7, "蓝牙信号异常"),
+        CONTROLLER_COMM_ERROR(8, "控制器通讯异常"),
+        USER_MANUAL_EXIT(9, "用户手动退出"),
+        NODE_COMM_ERROR(10, "节点通讯异常"),
+        TIMEOUT_EXIT(11, "超时退出"),
+        PARKING_SPEED_ABNORMAL(12, "挪车车速异常");
 
         private final int bit;
         private final String description;
@@ -508,12 +543,12 @@ public class VehicleState {
         this.parkingFeedbackEnabled = parkingFeedbackEnabled;
     }
 
-    public boolean isParkingValid() {
-        return parkingValid;
+    public ParkingStatus getParkingStatus() {
+        return parkingStatus;
     }
 
-    public void setParkingValid(boolean parkingValid) {
-        this.parkingValid = parkingValid;
+    public void setParkingStatus(ParkingStatus parkingStatus) {
+        this.parkingStatus = parkingStatus;
     }
 
     public Set<ParkingFailureReason> getParkingFailureReasons() {
@@ -595,7 +630,6 @@ public class VehicleState {
                 ", currentRssi=" + currentRssi +
                 ", unlockRssi=" + unlockRssi +
                 ", lockRssi=" + lockRssi +
-                // PKE周期数据
                 ", frontLeftDoor=" + frontLeftDoor +
                 ", frontRightDoor=" + frontRightDoor +
                 ", rearLeftDoor=" + rearLeftDoor +
@@ -607,9 +641,8 @@ public class VehicleState {
                 ", powerOn=" + powerOn +
                 ", gpsPositioned=" + gpsPositioned +
                 ", gpsSignal=" + gpsSignal +
-                // 挪车反馈
                 ", parkingFeedbackEnabled=" + parkingFeedbackEnabled +
-                ", parkingValid=" + parkingValid +
+                ", parkingStatus=" + (parkingStatus != null ? parkingStatus.getDescription() : "null") +
                 ", parkingFailureReasons=" + getParkingFailureDescription() +
                 '}';
     }
